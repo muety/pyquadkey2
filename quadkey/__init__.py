@@ -1,5 +1,5 @@
-from util import precondition
-from tile_system import TileSystem, valid_key
+from .util import precondition
+from .tile_system import TileSystem, valid_key
 
 LAT_STR = 'lat'
 LON_STR = 'lon'
@@ -27,7 +27,7 @@ class QuadKey:
         perms = [(-1, -1), (-1, 0), (-1, 1), (0, -1),
                  (0, 1), (1, -1), (1, 0), (1, 1)]
         tiles = set(
-            map(lambda perm: (abs(tile[0] + perm[0]), abs(tile[1] + perm[1])), perms))
+            [(abs(tile[0] + perm[0]), abs(tile[1] + perm[1])) for perm in perms])
         return [TileSystem.tile_to_quadkey(tile, level) for tile in tiles]
 
     def is_ancestor(self, node):
@@ -48,44 +48,50 @@ class QuadKey:
         """
         return node.is_ancestor(self)
 
+    def side(self):
+        return 256 * TileSystem.ground_resolution(0, self.level)
+
     def area(self):
-        size = TileSystem.map_size(self.level)
-        LAT = 0
-        res = TileSystem.ground_resolution(LAT, self.level)
-        side = (size / 2) * res
+        side = self.side()
         return side * side
 
-    def xdifference(self, to):
+    @staticmethod
+    def xdifference(first, second):
         """ Generator
             Gives the difference of quadkeys between self and to
             Generator in case done on a low level
             Only works with quadkeys of same level
         """
-        x,y = 0,1
-        assert self.level == to.level
-        self_tile = list(self.to_tile()[0])
-        to_tile = list(to.to_tile()[0])
-        if self_tile[x] >= to_tile[x] and self_tile[y] <= self_tile[y]:
-            ne_tile, sw_tile = self_tile, to_tile
-        else:
-            sw_tile, ne_tile = self_tile, to_tile
-        cur = ne_tile[:]
-        while cur[x] >= sw_tile[x]:
-            while cur[y] <= sw_tile[y]:
-                yield from_tile(tuple(cur), self.level)
-                cur[y] += 1
+        x, y = 0, 1
+        assert first.level == second.level
+        self_tile = list(first.to_tile()[0])
+        to_tile = list(second.to_tile()[0])
+        se, sw, ne, nw = None, None, None, None
+        if self_tile[x] >= to_tile[x] and self_tile[y] <= to_tile[y]:
+            ne, sw = self_tile, to_tile
+        elif self_tile[x] <= to_tile[x] and self_tile[y] >= to_tile[y]:
+            sw, ne = self_tile, to_tile
+        elif self_tile[x] <= to_tile[x] and self_tile[y] <= to_tile[y]:
+            nw, se = self_tile, to_tile
+        elif self_tile[x] >= to_tile[x] and self_tile[y] >= to_tile[y]:
+            se, nw = self_tile, to_tile
+        cur = ne[:] if ne else se[:]
+        while cur[x] >= (sw[x] if sw else nw[x]):
+            while (sw and cur[y] <= sw[y]) or (nw and cur[y] >= nw[y]):
+                yield from_tile(tuple(cur), first.level)
+                cur[y] += 1 if sw else -1
             cur[x] -= 1
-            cur[y] = ne_tile[y]
+            cur[y] = ne[y] if ne else se[y]
 
     def difference(self, to):
         """ Non generator version of xdifference
         """
-        return [qk for qk in self.xdifference(to)]
+        return [qk for qk in self.xdifference(self, to)]
 
     def unwind(self):
         """ Get a list of all ancestors in descending order of level, including a new instance  of self
         """
-        return [ QuadKey(self.key[:l+1]) for l in reversed(range(len(self.key))) ]
+        return [ QuadKey(self.key[:l+1]) for l in reversed(list(range(len(self.key)))) ]
 
     def to_tile(self):
         return TileSystem.quadkey_to_tile(self.key)
@@ -98,10 +104,13 @@ class QuadKey:
         return TileSystem.pixel_to_geo(pixel, lvl)
 
     def __eq__(self, other):
-        return self.key == other.key
+        return isinstance(other, QuadKey) and self.key == other.key
 
     def __ne__(self, other):
         return not self.__eq__(other)
+
+    def __lt__(self, other):
+        return self.key.__lt__(other.key)
 
     def __str__(self):
         return self.key

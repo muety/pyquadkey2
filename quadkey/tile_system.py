@@ -1,4 +1,4 @@
-from util import precondition
+from .util import precondition
 from math import sin, cos, atan, exp, log, pi
 
 
@@ -84,7 +84,7 @@ class TileSystem:
     @staticmethod
     def pixel_to_tile(pixel):
         """Transform pixel to tile coordinates"""
-        return pixel[0] / 256, pixel[1] / 256
+        return int(pixel[0] / 256), int(pixel[1] / 256)
 
     @staticmethod
     def tile_to_pixel(tile, centered=False):
@@ -99,10 +99,10 @@ class TileSystem:
     @precondition(lambda tile, lvl: valid_level(lvl))
     def tile_to_quadkey(tile, level):
         """Transform tile coordinates to a quadkey"""
-        tile_x = tile[0]
-        tile_y = tile[1]
+        tile_x = int(tile[0])
+        tile_y = int(tile[1])
         quadkey = ""
-        for i in xrange(level):
+        for i in range(level):
             bit = level - i
             digit = ord('0')
             mask = 1 << (bit - 1)  # if (bit - 1) > 0 else 1 >> (bit - 1)
@@ -118,7 +118,7 @@ class TileSystem:
         """Transform quadkey to tile coordinates"""
         tile_x, tile_y = (0, 0)
         level = len(quadkey)
-        for i in xrange(level):
+        for i in range(level):
             bit = level - i
             mask = 1 << (bit - 1)
             if quadkey[level - bit] == '1':
