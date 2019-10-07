@@ -1,5 +1,5 @@
 from .util import precondition
-from .tile_system import TileSystem, valid_key
+from .tile_system import TileSystem, valid_key, valid_geo
 
 LAT_STR = 'lat'
 LON_STR = 'lon'
@@ -121,6 +121,7 @@ class QuadKey:
     def __hash__(self):
         return hash(self.key)
 
+@precondition(lambda geo, level: valid_geo(*geo))
 def from_geo(geo, level):
     """
     Constucts a quadkey representation from geo and level

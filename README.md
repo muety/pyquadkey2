@@ -13,7 +13,7 @@ Converts a lat,lon to pixel space to tile space to a quadkey
 
     import quadkey
 
-    qk = quadkey.from_geo((-105, 40), 17)
+    qk = quadkey.from_geo((40, -105), 17)
     print(qk.key) # => 02310101232121212 
     assert qk.level is 17
     tile = qk.to_tile() # => [(x, y), z]
