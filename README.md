@@ -1,5 +1,5 @@
 # 🌍 pyquadkey2
-[![Buy me a coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoff.ee/n1try)
+[![Documentation](https://readthedocs.org/projects/pyquadkey2/badge/?version=latest)](https://pyquadkey2.readthedocs.io)
 
 This is a feature-rich Python implementation of [QuadKeys](https://docs.microsoft.com/en-us/bingmaps/articles/bing-maps-tile-system), an approach to **geographical tiling**, that was proposed by Microsoft to be used for Bing Maps.
 
@@ -26,3 +26,8 @@ This library requires **Python 3.6** or higher. To compile it by yourself, Cytho
 
 ### From Source
 TODO
+
+## License
+Apache 2.0
+
+[![Buy me a coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoff.ee/n1try)
