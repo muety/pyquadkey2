@@ -1,4 +1,4 @@
-# Introduction
+# 🌍 Introduction
 This is a feature-rich Python implementation of [QuadKeys](https://docs.microsoft.com/en-us/bingmaps/articles/bing-maps-tile-system), an approach to **geographical tiling**, that was proposed by Microsoft to be used for Bing Maps.
 
 In essence, the concept is to **recursively** divide the flat, two-dimensional world map into squares. Each square contains **four squares** as children, which again contain four squares and so on, up **centimeter-level precision**. Each of these squares is **uniquely identifiable with a string** like `021030032`.
@@ -14,3 +14,5 @@ For more details on the concept, please refer to the [original article](https://
 * ✅ Cython backend for improved performance
 * ✅ 64-bit integer representation of QuadKeys
 * ✅ Additional features and convenience methods
+
+[![Buy me a coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoff.ee/n1try)

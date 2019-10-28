@@ -1,57 +1,28 @@
-QuadKey
-=======
+# 🌍 pyquadkey2
+[![Buy me a coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoff.ee/n1try)
 
-Quad key object used for Geospatial segmentation. Based off the idea of a quadtree and used as the Bing Maps tile system.
+This is a feature-rich Python implementation of [QuadKeys](https://docs.microsoft.com/en-us/bingmaps/articles/bing-maps-tile-system), an approach to **geographical tiling**, that was proposed by Microsoft to be used for Bing Maps.
 
-Given a (lat, lon) and level produce a quadkey to be used in Bing Maps.
-Can also supply methods to generate a Google Maps TileXYZ
+In essence, the concept is to **recursively** divide the flat, two-dimensional world map into squares. Each square contains **four squares** as children, which again contain four squares and so on, up **centimeter-level precision**. Each of these squares is **uniquely identifiable with a string** like `021030032`.
 
-Built off of the TileSystem static class outlined here: http://msdn.microsoft.com/en-us/library/bb259689.aspx
+For more details on the concept, please refer to the [original article](https://docs.microsoft.com/en-us/bingmaps/articles/bing-maps-tile-system).
 
-Converts a lat,lon to pixel space to tile space to a quadkey 
+[n1try/pyquadkey2](https://github.com/n1try/pyquadkey2) originates from a **fork** of [buckhx/QuadKey](https://github.com/buckhx/QuadKey), which is not maintained anymore. It build on top of that project and adds:
 
+* ✅ Several (critical) [bug fixes](https://github.com/buckhx/QuadKey/pull/15)
+* ✅ Python 3 support
+* ✅ [Type hints](https://docs.python.org/3.6/library/typing.html) for all methods
+* ✅ Higher test coverage
+* ✅ Cython backend for improved performance
+* ✅ 64-bit integer representation of QuadKeys
+* ✅ Additional features and convenience methods
 
-    import quadkey
+## Installation
+### Requirements
+This library requires **Python 3.6** or higher. To compile it by yourself, Cython is required in addition.
 
-    qk = quadkey.from_geo((40, -105), 17)
-    print(qk.key) # => 02310101232121212 
-    assert qk.level is 17
-    tile = qk.to_tile() # => [(x, y), z]
+### Using Pip
+`pip3 install pyquadkey2`
 
-Not a lot of documentation here, but the implementation has quite a bit, so look at the QuadKey definitions for better documention
-
-
-Install
--------
-
-The package on PyPI is quadkey, so the recommended installation is with pip
-
-     pip install quadkey
-
-Methods
--------
-
-There are many straightforward methods, so I'll only go into detail of the unique ones
-
-* children()
-* parent()
-* is_ancestor()
-* is_descendent()
-* area()
-* side()
-* nearby()
-* to_geo()
-* to_tile()
-* to_pixel()
-
-#### difference(to)
-
-Gets the quadkeys between self and to forming a rectangle, inclusive.
-
-    qk.difference(to) -> [qk,,,,,to]
-
-#### unwind()
-
-Gets a list of all ancestors in descending order by level, inclusive.
-
-    QuadKey('0123').unwind() -> ['0123','012','01','0']
+### From Source
+TODO
