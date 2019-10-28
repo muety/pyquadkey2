@@ -1,0 +1,8 @@
+site_name: pyquadkey2
+nav:
+  - Home: 'index.md'
+  - Installation: 'installation.md'
+  - Documentation:
+      - 'Instantiation': 'instantiation.md'
+      - 'Methods': 'methods.md'
+theme: 'readthedocs'
