@@ -67,7 +67,7 @@ class QuadKey:
     def is_ancestor(self, node: 'QuadKey') -> bool:
         return not (self.level <= node.level or self.key[:len(node.key)] != node.key)
 
-    def is_descendent(self, node):
+    def is_descendent(self, node) -> bool:
         return node.is_ancestor(self)
 
     def side(self) -> float:
