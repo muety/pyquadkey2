@@ -7,44 +7,36 @@ from quadkey.tilesystem import tilesystem
 
 class TileSystemTest(TestCase):
     def testGroundResolution(self):
-        geo = (40., -105.)
-        res = 936.87
-        self.assertAlmostEqual(res, tilesystem.ground_resolution(geo[0], 7), 2)
+        self.assertAlmostEqual(936.87, tilesystem.ground_resolution(40., 7), 2)
 
     def testGeoToPixel(self):
-        geo = (40., -105.)
-        level = 7
-        pixel = (6827, 12405)
-        self.assertEqual(pixel, tilesystem.geo_to_pixel(geo, level))
+        self.assertEqual((6827, 12405), tilesystem.geo_to_pixel((40., -105.), 7))
+
+    def testGeoToPixelClip(self):
+        self.assertEqual(tilesystem.geo_to_pixel((40., 180.), 7), tilesystem.geo_to_pixel((40., 181.), 7))
 
     def testPixelToGeo(self):
-        pixel = (6827, 12405)
-        level = 7
-        geo = (40.002372, -104.996338)
-        self.assertEqual(geo, tilesystem.pixel_to_geo(pixel, level))
+        self.assertEqual((40.002372, -104.996338), tilesystem.pixel_to_geo((6827, 12405), 7))
 
     def testPixelToTile(self):
-        pixel = (6827, 12405)
-        tile = (26, 48)
-        self.assertEqual(tile, tilesystem.pixel_to_tile(pixel))
+        self.assertEqual((26, 48), tilesystem.pixel_to_tile((6827, 12405)))
 
     def testTileToPixel(self):
-        tile = (26, 48)
-        pixel = (6656, 12288)
-        self.assertEqual(pixel, tilesystem.tile_to_pixel(tile, TileAnchor.ANCHOR_NW))
+        self.assertEqual((6656, 12288), tilesystem.tile_to_pixel((26, 48), TileAnchor.ANCHOR_NW))
 
     def testTileToQuadkey(self):
-        tile = (26, 48)
-        level = 7
-        key = '0231010'
-        self.assertEqual(key, tilesystem.tile_to_quadkey(tile, level))
+        self.assertEqual('0231010', tilesystem.tile_to_quadkey((26, 48), 7))
 
     def testQuadkeyToTile(self):
-        tile = (26, 48)
-        level = 7
-        key = '0231010'
-        self.assertEqual((tile, level), tilesystem.quadkey_to_tile(key))
+        self.assertEqual(((26, 48), 7), tilesystem.quadkey_to_tile('0231010'))
 
+    def testQuadkeyToQuadint(self):
+        self.assertEqual(1953184653288407055, tilesystem.quadkey_to_quadint('012301230123012'))
+        self.assertEqual(1379860704579813385, tilesystem.quadkey_to_quadint('010302121'))
+
+    def testQuadintToQuadkey(self):
+        self.assertEqual('012301230123012', tilesystem.quadint_to_quadkey(1953184653288407055))
+        self.assertEqual('010302121', tilesystem.quadint_to_quadkey(1379860704579813385))
 
 if __name__ == '__main__':
     unittest.main()

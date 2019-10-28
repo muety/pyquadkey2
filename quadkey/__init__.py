@@ -48,7 +48,7 @@ class QuadKey:
         if at_level <= 0:
             at_level = self.level + 1
 
-        if self.level >= LEVEL_RANGE[1] or at_level <= self.level:
+        if self.level >= LEVEL_RANGE[1] or at_level > LEVEL_RANGE[1] or at_level <= self.level:
             return []
 
         return [QuadKey(self.key + ''.join(k)) for k in itertools.product('0123', repeat=at_level - self.level)]
@@ -104,7 +104,7 @@ class QuadKey:
         return [qk for qk in self.xdifference(self, to)]
 
     @staticmethod
-    def bbox_filled(quadkeys: List['QuadKey']) -> List['QuadKey']:
+    def bbox(quadkeys: List['QuadKey']) -> List['QuadKey']:
         assert len(quadkeys) > 0
 
         level = quadkeys[0].level
@@ -152,7 +152,7 @@ class QuadKey:
         return hash(self.key)
 
 
-@precondition(lambda geo, level: valid_geo(*geo))
+@precondition(lambda geo, level: valid_geo(*geo) and valid_level(level))
 def from_geo(geo: Tuple[float, float], level: int) -> 'QuadKey':
     pixel = tilesystem.geo_to_pixel(geo, level)
     tile = tilesystem.pixel_to_tile(pixel)
