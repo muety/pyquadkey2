@@ -1,2 +1,3 @@
-import tests
-tests.run()
+import test
+
+test.run()
