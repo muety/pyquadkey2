@@ -138,7 +138,8 @@ cpdef str quadint_to_quadkey(const unsigned long quadint):
 cpdef unsigned long quadkey_to_quadint(str quadkey):
     cdef int zoom = len(quadkey)
     cdef int i
-    cdef unsigned long qi, bit_loc
+    cdef unsigned long qi = 0
+    cdef unsigned long bit_loc
 
     for i in range(zoom):
         bit_loc = (64 - ((i + 1) * 2))
