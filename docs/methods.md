@@ -1,3 +1,5 @@
+# Methods
+
 ## children
 `children(self, at_level: int = -1) -> List['QuadKey']`
 
