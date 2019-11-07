@@ -1,5 +1,5 @@
 # 🌍 pyquadkey2
-[![Documentation](https://readthedocs.org/projects/pyquadkey2/badge/?version=latest)](https://pyquadkey2.readthedocs.io)
+[![Documentation](https://docs.muetsch.io/badge.svg)](https://docs.muetsch.io/pyquadkey2/)
 
 This is a feature-rich Python implementation of [QuadKeys](https://docs.microsoft.com/en-us/bingmaps/articles/bing-maps-tile-system), an approach to **geographical tiling**, that was proposed by Microsoft to be used for Bing Maps.
 
@@ -24,7 +24,7 @@ This library requires **Python 3.6** or higher. To compile it by yourself, Cytho
 ### Using Pip
 * `pip3 install pyquadkey2`
 
-If you encounter problems while installing, please report them as a new issue.
+Pip installation is only tested for Linux, yet. If you encounter problems with the installation on Mac or Windows, please report them as a new issue.
 
 ### From archive
 * Download the latest [release](https://github.com/n1try/pyquadkey2/releases) as archive (`.tar.gz`) or wheel (`.whl`), e.g. `0.1.1.tar.gz`

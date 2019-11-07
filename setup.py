@@ -25,7 +25,9 @@ setup(
         'Programming Language :: Python :: 3',
         'Programming Language :: Cython',
         'License :: OSI Approved :: Apache Software License',
-        'Operating System :: OS Independent',
+        'Operating System :: MacOS',
+        'Operating System :: Unix',
+        'Operating System :: POSIX :: Linux',
         'Natural Language :: English',
         'Topic :: Scientific/Engineering :: GIS',
         'Typing :: Typed'
@@ -33,6 +35,7 @@ setup(
     project_urls={
         'Bug Tracker': 'https://github.com/n1try/pyquadkey2/issues',
         'Source Code': 'https://github.com/n1try/pyquadkey2',
+        'Documentation': 'https://docs.muetsch.io/pyquadkey2/'
     },
     keywords='tiling quadkey quadtile geospatial geohash',
     python_requires='>=3.6',
