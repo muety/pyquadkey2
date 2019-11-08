@@ -11,7 +11,9 @@ def condition(precondition=None, postcondition=None):
             if postcondition is not None:
                 assert postcondition(retval)
             return retval
+
         return wrapper
+
     return decorator
 
 

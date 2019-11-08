@@ -12,14 +12,15 @@ with open('README.md', 'r') as fh:
 
 setup(
     name='pyquadkey2',
-    version='0.1.1',
+    version='0.2.0',
     description='Python implementation of geographical tiling using QuadKeys as proposed by Microsoft',
     long_description=long_description,
     long_description_content_type='text/markdown',
     author='Ferdinand Mütsch',
     author_email='ferdinand@muetsch.io',
     url='https://github.com/n1try/pyquadkey2',
-    packages=find_packages(),
+    packages=find_packages('src'),
+    package_dir={'': 'src'},
     classifiers=[
         'Development Status :: 4 - Beta',
         'Programming Language :: Python :: 3',
@@ -39,6 +40,6 @@ setup(
     },
     keywords='tiling quadkey quadtile geospatial geohash',
     python_requires='>=3.6',
-    ext_modules=[Extension('tilesystem', ['quadkey/tilesystem/tilesystem.c'])],
+    ext_modules=[Extension('tilesystem', ['src/pyquadkey2/quadkey/tilesystem/tilesystem.c'])],
     ext_package='pyquadkey2'
 )

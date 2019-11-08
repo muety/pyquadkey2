@@ -1,8 +1,11 @@
+import sys
 import unittest
 from unittest import TestCase
 
-from quadkey import TileAnchor
-from quadkey.tilesystem import tilesystem
+sys.path.append('../src')
+
+from pyquadkey2.quadkey import TileAnchor
+from pyquadkey2.quadkey.tilesystem import tilesystem
 
 
 class TileSystemTest(TestCase):
