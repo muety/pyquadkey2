@@ -84,7 +84,7 @@ cpdef str tile_to_quadkey(const (long, long) tile, const long level):
     cdef int i
     cdef long tile_x, tile_y, mask, bit
     cdef char digit
-    cdef char qk[level]
+    cdef char qk[31]
     tile_x = tile[0]
     tile_y = tile[1]
     quadkey = ''
@@ -117,7 +117,7 @@ cpdef ((long, long), long) quadkey_to_tile(str quadkey):
     return (tile_x, tile_y), level
 
 # Inspired by https://github.com/joekarl/binary-quadkey
-cpdef str quadint_to_quadkey(const unsigned long quadint):
+cpdef str quadint_to_quadkey(const unsigned long long quadint):
     cdef int zoom = quadint & 0b11111
     cdef int i
     cdef unsigned long char_bits
@@ -131,10 +131,10 @@ cpdef str quadint_to_quadkey(const unsigned long quadint):
     return qk[:zoom].decode('UTF-8')
 
 # Inspired by https://github.com/joekarl/binary-quadkey
-cpdef unsigned long quadkey_to_quadint(str quadkey):
+cpdef unsigned long long quadkey_to_quadint(str quadkey):
     cdef int zoom = len(quadkey)
     cdef int i
-    cdef unsigned long qi = 0
+    cdef unsigned long long qi = 0
     cdef unsigned long bit_loc
 
     for i in range(zoom):
