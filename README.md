@@ -7,9 +7,12 @@ This is a feature-rich Python implementation of [QuadKeys](https://docs.microsof
 
 In essence, the concept is to **recursively** divide the flat, two-dimensional world map into squares. Each square contains **four squares** as children, which again contain four squares and so on, up **centimeter-level precision**. Each of these squares is **uniquely identifiable with a string** like `021030032`.
 
-For more details on the concept, please refer to the [original article](https://docs.microsoft.com/en-us/bingmaps/articles/bing-maps-tile-system).
+For more details on the concept, please refer to
+the [original article](https://docs.microsoft.com/en-us/bingmaps/articles/bing-maps-tile-system).
 
-[muety/pyquadkey2](https://github.com/muety/pyquadkey2) originates from a **fork** of [buckhx/QuadKey](https://github.com/buckhx/QuadKey), which is not maintained anymore. It build on top of that project and adds:
+[muety/pyquadkey2](https://github.com/muety/pyquadkey2) originates from a **fork**
+of [buckhx/QuadKey](https://github.com/buckhx/QuadKey), which is not maintained anymore. It builds on top of that
+project and adds:
 
 * ✅ Several (critical) [bug fixes](https://github.com/buckhx/QuadKey/pull/15)
 * ✅ Python 3 support

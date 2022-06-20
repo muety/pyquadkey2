@@ -25,7 +25,7 @@ qk = quadkey.from_int(1379860704579813385)          # -> 010302121
 ```
 
 ## From coordinates
-Creates a new `QuadKey` object from geo / GNSS coordinates
+Creates a new `QuadKey` object from WGS 84 lat/lon coordinates
 
 `from_geo(geo: Tuple[float, float], level: int) -> 'QuadKey'`
 
