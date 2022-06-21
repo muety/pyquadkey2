@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 # https://packaging.python.org/tutorials/packaging-projects/
-# python3 setup.py sdist bdist_wheel
-# python3 -m twine upload --repository-url https://test.pypi.org/legacy/ dist/*.tar.gz
+# pip install wheel auditwheel
+# python setup.py sdist bdist_wheel
+# python auditwheel repair -w dist/manylinux dist/pyquadkey2-0.2.2-cp39-cp39-linux_x86_64.whl  # <-- update lib- and python versions heree
+# python -m twine upload --repository-url https://test.pypi.org/legacy/ dist/*.tar.gz dist/*win_*.whl dist/manylinux/*.whl
 # mkdocs build
 
 from setuptools import Extension
