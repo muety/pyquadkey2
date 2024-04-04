@@ -154,25 +154,18 @@ class QuadKey:
 
     def __hash__(self):
         return hash(self.key)
-        
-    @classmethod
-    def from_geo(cls, geo: Tuple[float, float], level: int) -> 'QuadKey':
-        pixel = tilesystem.geo_to_pixel(geo, level)
-        tile = tilesystem.pixel_to_tile(pixel)
-        key = tilesystem.tile_to_quadkey(tile, level)
-        return cls(key)
 
     @classmethod
     def from_tile(cls, tile: Tuple[int, int], level: int) -> 'QuadKey':
         return cls(tilesystem.tile_to_quadkey(tile, level))
 
-
     @classmethod
     def from_geo(cls, geo: Tuple[float, float], level: int) -> 'QuadKey':
         pixel = tilesystem.geo_to_pixel(geo, level)
         tile = tilesystem.pixel_to_tile(pixel)
         key = tilesystem.tile_to_quadkey(tile, level)
         return cls(key)
+
 
 @precondition(lambda geo, level: valid_geo(*geo) and valid_level(level))
 def from_geo(geo: Tuple[float, float], level: int) -> 'QuadKey':
