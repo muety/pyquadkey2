@@ -55,10 +55,10 @@ class QuadKey:
         if self.level >= LEVEL_RANGE[1] or at_level > LEVEL_RANGE[1] or at_level <= self.level:
             return []
 
-        return [QuadKey(self.key + ''.join(k)) for k in itertools.product('0123', repeat=at_level - self.level)]
+        return [self.__class__(self.key + ''.join(k)) for k in itertools.product('0123', repeat=at_level - self.level)]
 
     def parent(self) -> 'QuadKey':
-        return QuadKey(self.key[:-1])
+        return self.__class__(self.key[:-1])
 
     def nearby_custom(self, config: Tuple[Iterable[int], Iterable[int]]) -> List[str]:
         perms = set(itertools.product(config[0], config[1]))
@@ -81,8 +81,8 @@ class QuadKey:
         side = self.side()
         return side * side
 
-    @staticmethod
-    def xdifference(first: 'QuadKey', second: 'QuadKey') -> Generator['QuadKey', None, None]:
+    @classmethod
+    def xdifference(cls, first: 'QuadKey', second: 'QuadKey') -> Generator['QuadKey', None, None]:
         x, y = 0, 1
         assert first.level == second.level
         self_tile = list(first.to_tile()[0])
@@ -99,7 +99,7 @@ class QuadKey:
         cur = ne[:] if ne else se[:]
         while cur[x] >= (sw[x] if sw else nw[x]):
             while (sw and cur[y] <= sw[y]) or (nw and cur[y] >= nw[y]):
-                yield from_tile(tuple(cur), first.level)
+                yield cls.from_tile(tuple(cur), first.level)
                 cur[y] += 1 if sw else -1
             cur[x] -= 1
             cur[y] = ne[y] if ne else se[y]
@@ -107,15 +107,15 @@ class QuadKey:
     def difference(self, to: 'QuadKey') -> List['QuadKey']:
         return [qk for qk in self.xdifference(self, to)]
 
-    @staticmethod
-    def bbox(quadkeys: List['QuadKey']) -> List['QuadKey']:
+    @classmethod
+    def bbox(cls, quadkeys: List['QuadKey']) -> List['QuadKey']:
         assert len(quadkeys) > 0
 
         level = quadkeys[0].level
         tiles = [qk.to_tile()[0] for qk in quadkeys]
         x, y = zip(*tiles)
-        ne = from_tile((max(x), min(y)), level)
-        sw = from_tile((min(x), max(y)), level)
+        ne = cls.from_tile((max(x), min(y)), level)
+        sw = cls.from_tile((min(x), max(y)), level)
 
         return ne.difference(sw)
 
@@ -154,14 +154,29 @@ class QuadKey:
 
     def __hash__(self):
         return hash(self.key)
+        
+    @classmethod
+    def from_geo(cls, geo: Tuple[float, float], level: int) -> 'QuadKey':
+        pixel = tilesystem.geo_to_pixel(geo, level)
+        tile = tilesystem.pixel_to_tile(pixel)
+        key = tilesystem.tile_to_quadkey(tile, level)
+        return cls(key)
 
+    @classmethod
+    def from_tile(cls, tile: Tuple[int, int], level: int) -> 'QuadKey':
+        return cls(tilesystem.tile_to_quadkey(tile, level))
+
+
+    @classmethod
+    def from_geo(cls, geo: Tuple[float, float], level: int) -> 'QuadKey':
+        pixel = tilesystem.geo_to_pixel(geo, level)
+        tile = tilesystem.pixel_to_tile(pixel)
+        key = tilesystem.tile_to_quadkey(tile, level)
+        return cls(key)
 
 @precondition(lambda geo, level: valid_geo(*geo) and valid_level(level))
 def from_geo(geo: Tuple[float, float], level: int) -> 'QuadKey':
-    pixel = tilesystem.geo_to_pixel(geo, level)
-    tile = tilesystem.pixel_to_tile(pixel)
-    key = tilesystem.tile_to_quadkey(tile, level)
-    return QuadKey(key)
+    return QuadKey.from_geo(geo, level)
 
 
 def from_tile(tile: Tuple[int, int], level: int) -> 'QuadKey':
