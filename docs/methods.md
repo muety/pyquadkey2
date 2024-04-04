@@ -121,14 +121,14 @@ QuadKey.bbox(qks)  # -> [011, 013, 031, 033, 010, 012, 030, 032]
 ## QuadKey.from_geo (static)
 `from_geo(geo: Tuple[float, float], level: int) -> 'QuadKey'`
 
-See [instantiation](/instantiation).
+See [instantiation](instantiation.md#from-string-representation).
 
 ## QuadKey.from_str (static)
 `from_str(qk_str: str) -> 'QuadKey'`
 
-See [instantiation](/instantiation).
+See [instantiation](instantiation.md#from-integer-representation).
 
 ## QuadKey.from_int (static)
 `from_int(qk_int: int) -> 'QuadKey'`
 
-See [instantiation](/instantiation).
+See [instantiation](instantiation.md#from-coordinates).
