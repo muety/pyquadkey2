@@ -60,7 +60,7 @@ cpdef (double, double) pixel_to_geo((double, double) pixel, const long level):
     y = 0.5 - (clip(pixel_y, (0, ms - 1)) / ms)
     lat = 90 - 360 * math.atan(math.exp(-y * 2 * math.pi)) / math.pi
     lon = 360 * x
-    return math.round(lat * 1e12) / 1e12, math.round(lon * 1e12) / 1e12
+    return int(lat * 1e12) / 1e12, int(lon * 1e12) / 1e12
 
 cpdef (long, long) pixel_to_tile(const (long, long) pixel):
     return pixel[0] // 256, pixel[1] // 256
