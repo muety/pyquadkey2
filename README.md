@@ -91,7 +91,7 @@ pip install setuptools wheel auditwheel
 python -m build
 cd dist
 auditwheel repair *.whl
-twine upload --repository testpypi wheelhouse/* ../*.tar.gz
+twine upload --repository testpypi wheelhouse/* ./*.tar.gz
 ```
 
 ## License
