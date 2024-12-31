@@ -1,3 +1,4 @@
+from functools import lru_cache
 import itertools
 import re
 from enum import IntEnum
@@ -50,6 +51,12 @@ def valid_key(key: str) -> bool:
     except ValueError:
         return False
 
+@lru_cache(128)
+def minmax_tile(level: int) -> Tuple[int, int]:
+    '''Returns minimum and maximum possible coordinates of a tile at given zoom level'''
+    QuadKey.validate_level(level)
+    return (0, 2 ** level - 1)
+
 class QuadKey:
     def __init__(self, key: str):
         self.validate_key(key)
@@ -72,8 +79,12 @@ class QuadKey:
 
     def nearby_custom(self, config: Tuple[Iterable[int], Iterable[int]]) -> List[str]:
         perms = set(itertools.product(config[0], config[1]))
-        tiles = set(map(lambda perm: (abs(self.tile[0] + perm[0]), abs(self.tile[1] + perm[1])), perms))
-        return [tilesystem.tile_to_quadkey(tile, self.level) for tile in tiles]
+        
+        tiles = map(lambda perm: (self.tile[0] + perm[0], self.tile[1] + perm[1]), perms)
+        tiles = filter(lambda tile: tile[0] >= 0 and tile[1] >= 0, tiles)
+        tiles = filter(lambda tile: tile[0] <= minmax_tile(self.level)[1] and tile[1] <= minmax_tile(self.level)[1], tiles)
+        
+        return sorted([tilesystem.tile_to_quadkey(tile, self.level) for tile in tiles])
 
     def nearby(self, n: int = 1) -> List[str]:
         return self.nearby_custom((range(-n, n + 1), range(-n, n + 1)))

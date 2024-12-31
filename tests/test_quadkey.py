@@ -80,11 +80,16 @@ class QuadKeyTest(TestCase):
     def testNearby(self):
         self.assertEqual({'0', '1', '2', '3'}, set(quadkey.from_str('0').nearby()))
         self.assertEqual({'00', '01', '10', '02', '03', '12'}, set(quadkey.from_str('01').nearby()))
+        self.assertEqual({'330', '331', '332', '333'}, set(quadkey.from_str('333').nearby()))
 
     def testNearbyWithRadius(self):
         self.assertEqual(
             {'023', '012', '103', '212', '021', '303', '033', '300', '203', '030', '211', '102', '003', '301', '031', '302', '201', '032', '120', '123', '213', '013', '122', '121', '210'},
             set(quadkey.from_str('033').nearby(n=2))
+        )
+        self.assertEqual(
+            {'202','203','212','220','221','230','222','223','232'},
+            set(quadkey.from_str('222').nearby(n=2))
         )
 
     def testDifference(self):
