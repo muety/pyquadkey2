@@ -5,9 +5,9 @@ from enum import IntEnum
 from typing import Tuple, List, Iterable, Generator, Dict
 
 try:
-    from pyquadkey2 import tilesystem
-except (ModuleNotFoundError, ImportError):
     from .tilesystem import tilesystem
+except (ModuleNotFoundError, ImportError):
+    from pyquadkey2.quadkey.tilesystem import tilesystem
 
 from .util import precondition
 
@@ -79,11 +79,11 @@ class QuadKey:
 
     def nearby_custom(self, config: Tuple[Iterable[int], Iterable[int]]) -> List[str]:
         perms = set(itertools.product(config[0], config[1]))
-        
+
         tiles = map(lambda perm: (self.tile[0] + perm[0], self.tile[1] + perm[1]), perms)
         tiles = filter(lambda tile: tile[0] >= 0 and tile[1] >= 0, tiles)
         tiles = filter(lambda tile: tile[0] <= minmax_tile(self.level)[1] and tile[1] <= minmax_tile(self.level)[1], tiles)
-        
+
         return sorted([tilesystem.tile_to_quadkey(tile, self.level) for tile in tiles])
 
     def nearby(self, n: int = 1) -> List[str]:
@@ -184,12 +184,12 @@ class QuadKey:
     def from_geo(cls, geo: Tuple[float, float], level: int) -> 'QuadKey':
         cls.validate_geo(*geo)
         cls.validate_level(level)
-        
+
         pixel = tilesystem.geo_to_pixel(geo, level)
         tile = tilesystem.pixel_to_tile(pixel)
         key = tilesystem.tile_to_quadkey(tile, level)
         return cls(key)
-    
+
     @staticmethod
     def validate_level(level: int):
         if not (LEVEL_RANGE[0] <= level <= LEVEL_RANGE[1]):
