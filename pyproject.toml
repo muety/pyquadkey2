@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pyquadkey2"
-version = "0.3.2"
+dynamic = ["version"]
 authors = [
     { name = "Ferdinand Mütsch", email = "ferdinand@muetsch.io" },
 ]
@@ -46,3 +46,11 @@ artifacts = ["*.so", "*.pyd", "*.dll", "*.dylib"]
 [tool.hatch.build.targets.wheel.hooks.cython]
 dependencies = ["hatch-cython", "cython"]
 options = { compile_py = false }
+
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.build.hooks.vcs]
+dependencies = ["hatch-vcs"]
+version-file = "src/pyquadkey2/_version.py"

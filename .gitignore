@@ -43,3 +43,6 @@ venv/
 .idea/
 
 site/
+
+# generated version file
+src/**/_version.py
