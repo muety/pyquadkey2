@@ -64,9 +64,8 @@ $ git clone https://github.com/muety/pyquadkey2
 $ python -m venv ./venv
 $ source venv/bin/activate
 
-# Install build
+# Install dependencies and run the build
 $ pip install build
-# build
 $ python -m build
 ```
 
