@@ -1,9 +1,5 @@
-import os
-import sys
 import unittest
 from unittest import TestCase
-
-sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../src'))
 
 from pyquadkey2.quadkey.util import *
 
