@@ -10,7 +10,7 @@ class QuadKey:
 		"""
 		self.key = key
 		self.level = len(key)
-		
+
 	def children(self):
 		if self.level >= 23:
 			return []
@@ -50,6 +50,27 @@ class QuadKey:
 		side = (size / 2) * res
 		return side*side
 
+    def difference(to):
+        """
+            Gives the difference of quadkeys between self and to
+            Generator in case done on a low level
+            Only works with quadkeys of same level
+        """
+        x,y = 0,1
+        assert self.level = to.level
+        self_tile = self.to_tile()[0]
+        to_tile = to.to_tile()[0]
+        if self_tile[x] >= to_tile[x] and self_tile[y] <= self_tile[y]
+            ne_tile, se_tile = self_tile, to_tile
+        else:
+            se_tile, ne_tile = self_tile, to_tile
+        cur = ne_tile
+        while cur[x] >= sw_tile[x]:
+            while cur[y] <= sw_tile[y]:
+                yield QuadKey.from_tile(cur, self.level)
+                cur[y] += 1
+            cur[x] -= 1
+
 	def to_tile(self):
 		return TileSystem.quadkey_to_tile(self.key)
 
@@ -73,13 +94,13 @@ class QuadKey:
 		return self.key
 
 	@staticmethod
-	def from_geo(geo, level):	
+	def from_geo(geo, level):
 		"""
 		Constucts a quadkey representation from geo and level
 		geo => (lat, lon)
 		If lat or lon are outside of bounds, they will be clipped
 		If level is outside of bounds, an AssertionError is raised
-		
+
 		"""
 		pixel = TileSystem.geo_to_pixel(geo, level)
 		tile = TileSystem.pixel_to_tile(pixel)
