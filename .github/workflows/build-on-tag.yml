@@ -6,15 +6,35 @@ on:
       - '*'
 
 jobs:
+  build_tile_system:
+    name: Build tilesystem via Cython
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout pyquadkey2
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.x
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - name: Compile tilesystem
+        run: |
+          cd src/pyquadkey2/quadkey/tilesystem
+          python3 -m pip install -r requirements.txt
+          cython tilesystem.pyx
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: tilesystem.c
+          path: src/pyquadkey2/quadkey/tilesystem/tilesystem.c
+
   build_wheels:
     name: Build wheel ${{ matrix.python }}-${{ matrix.buildplat[1] }}
+    needs: build_tile_system
     runs-on: ${{ matrix.buildplat[0] }}
     strategy:
-      # Ensure that a wheel builder finishes even if another fails
       fail-fast: false
       matrix:
-        # Github Actions doesn't support pairing matrix values together, let's improvise
-        # https://github.com/github/feedback/discussions/7835#discussioncomment-1769026
         buildplat:
           - [ ubuntu-22.04, manylinux_x86_64 ]
           - [ ubuntu-22.04, musllinux_x86_64 ]
@@ -32,11 +52,11 @@ jobs:
         with:
           python-version: "3.x"
 
-      - name: Compile Tile-system
-        run: |
-          cd src/pyquadkey2/quadkey/tilesystem
-          python3 -m pip install -r requirements.txt
-          python3 setup.py build_ext --inplace
+      - name: Download tilesystem.c
+        uses: actions/download-artifact@v4
+        with:
+          name: tilesystem.c
+          path: src/pyquadkey2/quadkey/tilesystem
 
       - name: Build Wheel
         uses: pypa/cibuildwheel@v2.22.0
@@ -56,26 +76,37 @@ jobs:
         with:
           files: ./wheelhouse/*.whl
 
-#
-#
-#  build_sdist:
-#    name: Build sdist
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout pyquadkey2
-#        uses: actions/checkout@v4
-#
-#      - name: Set up Python 3.x
-#        uses: actions/setup-python@v5
-#        with:
-#          python-version: "3.x"
-#
-#      - name: Compile Tile-system
-#        run: |
-#          cd src/pyquadkey2/quadkey/tilesystem
-#          python3 -m pip install -r requirements.txt
-#          python3 setup.py build_ext --inplace
-#
-#      - name: build
-#        run: python3 -m build --sdist
+  build_sdist:
+    name: Build sdist
+    needs: build_tile_system
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout pyquadkey2
+        uses: actions/checkout@v4
 
+      - name: Set up Python 3.x
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Download tilesystem.c
+        uses: actions/download-artifact@v4
+        with:
+          name: tilesystem.c
+          path: src/pyquadkey2/quadkey/tilesystem
+
+      - name: build
+        run: |
+          python3 -m pip install build
+          python3 -m build --sdist
+
+      - name: Upload sdist
+        uses: actions/upload-artifact@v4
+        with:
+          name: sdist
+          path: ./dist/*.tar.gz
+
+      - name: Publish Wheel
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ./dist/*
