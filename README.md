@@ -3,8 +3,9 @@ QuadKey
 
 Quad key object used for Geospatial segmentation
 
+		from quadkey import QuadKey
 
-    quadkey = QuadKey(-105, 50, 17)
-		quadkey.lat
-		quadkey.lon
-		copy = QuadKey.from_str(quadkey.key)
+    qk = QuadKey((-105, 40) 17)
+		print qk.key # => 02310101232121212 
+		assert qk.level is 17
+		copy = QuadKey.from_str(qk.key)

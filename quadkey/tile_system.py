@@ -1,18 +1,21 @@
 from util import precondition
 from math import sin, cos, atan, exp, log, pi
-from decimal import *
 
 def valid_level(level):
 	LEVEL_RANGE = (1,23)
 	return LEVEL_RANGE[0] <= level <= LEVEL_RANGE[1]
 
-getcontext().prec = 6
+@precondition(lambda key: valid_level(len(key)))
+def valid_key(key):
+	return TileSystem.KEY_PATTERN.match(key) is not None
 
 class TileSystem:
 	"""
 	Class with static method to build quadkeys from lat, lon, levels
 	see http://msdn.microsoft.com/en-us/library/bb259689.aspx
 	"""
+	import re
+	KEY_PATTERN = re.compile("^[0-3]+$")
 
 	EARTH_RADIUS = 6378137
 	LATITUDE_RANGE = (-85.05112878, 85.05112878)
