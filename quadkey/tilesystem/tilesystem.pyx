@@ -24,13 +24,9 @@ cdef long map_size(const long level):
     cdef unsigned long base = 256
     return base << <unsigned long> level
 
-# Alternative map_size implementation
-# Used in:
+# Alternative map size implementation, inspired by:
 #  – https://github.com/CartoDB/python-quadkey/blob/a7c53e8e8bd18eb9ba187b345bd2faf525b23ecc/quadkey.c#L194
 #  – https://github.com/ethlo/jquad/blob/3c0bed3b0433ef5f67e786a41c56af9cc103d7dd/src/main/java/com/ethlo/quadkey/QuadKey.java#L130
-# This one produces "smaller" quadints (why?)
-# However, with this map_size, quadkey strings are not generated properly anymore. Instead, we would probably have to
-# derive quadkeys from quadints using https://github.com/n1try/jquad/blob/095bbd0e1b1fc557c94532ec8455191aecf9b913/src/main/java/com/ethlo/quadkey/QuadKey.java#L154 in combination with https://stackoverflow.com/a/699891/3112139
 
 # cdef long map_size(const long level):
 #     cdef unsigned long base = 256
