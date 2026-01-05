@@ -1,5 +1,5 @@
-import unittest
 from unittest import TestCase
+
 from quadkey.util import *
 
 

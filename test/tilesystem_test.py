@@ -1,3 +1,4 @@
+import unittest
 from unittest import TestCase
 
 from quadkey import TileAnchor
@@ -43,3 +44,7 @@ class TileSystemTest(TestCase):
         level = 7
         key = '0231010'
         self.assertEqual((tile, level), tilesystem.quadkey_to_tile(key))
+
+
+if __name__ == '__main__':
+    unittest.main()

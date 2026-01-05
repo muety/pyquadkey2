@@ -1,9 +1,10 @@
+import unittest
 from unittest import TestCase
 
 import quadkey
 
 
-class QuadkeyTest(TestCase):
+class QuadKeyTest(TestCase):
 
     def testInit(self):
         qk = quadkey.from_str('0321201120')
@@ -78,3 +79,7 @@ class QuadkeyTest(TestCase):
     def testArea(self):
         qk = quadkey.QuadKey(''.join(['0'] * 10))
         self.assertEqual(int(qk.area()), 1531607591)
+
+
+if __name__ == '__main__':
+    unittest.main()
