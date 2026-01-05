@@ -3,7 +3,11 @@ import re
 from enum import IntEnum
 from typing import Tuple, List, Iterable, Generator, Dict
 
-from .tilesystem import tilesystem
+try:
+    from pyquadkey2 import tilesystem
+except ModuleNotFoundError:
+    from .tilesystem import tilesystem
+
 from .util import precondition
 
 LAT_STR: str = 'lat'

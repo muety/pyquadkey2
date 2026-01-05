@@ -40,4 +40,6 @@ nosetests.xml
 # Virtualenv
 venv/
 
-.idea
+.idea/
+
+site/
