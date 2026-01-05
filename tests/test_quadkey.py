@@ -17,11 +17,11 @@ class QuadKeyTest(TestCase):
         self.assertEqual(key, qk.key)
 
     def testInitEmptyInput(self):
-        with self.assertRaises(AssertionError):
+        with self.assertRaises(ValueError):
             quadkey.from_str('')
 
     def testInitInvalidKey(self):
-        with self.assertRaises(AssertionError):
+        with self.assertRaises(ValueError):
             quadkey.from_str('0156510012')
 
     def testFromGeo(self):
@@ -29,7 +29,7 @@ class QuadKeyTest(TestCase):
         self.assertEqual('311213', quadkey.from_geo((-27.052395, 152.97702), 6).key)  # https://github.com/muety/pyquadkey2/issues/13
 
     def testFromGeoInvalidLevel(self):
-        with self.assertRaises(AssertionError):
+        with self.assertRaises(ValueError):
             quadkey.from_geo((49.014205, 8.420025), 32)
 
     def testEquality(self):
@@ -65,7 +65,7 @@ class QuadKeyTest(TestCase):
         self.assertEqual(quadkey.from_str('000'), quadkey.from_str('0001').parent())
 
     def testParentMinLevel(self):
-        with self.assertRaises(AssertionError):
+        with self.assertRaises(ValueError):
             quadkey.from_str('0').parent()
 
     def testAncestorDescendent(self):

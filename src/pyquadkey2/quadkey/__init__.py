@@ -12,7 +12,7 @@ from .util import precondition
 
 LAT_STR: str = 'lat'
 LON_STR: str = 'lon'
-LATITUDE_RANGE: Tuple[float, float] = (-85.05112878, 85.05112878)
+LATITUDE_RANGE: Tuple[float, float] = (-85.05112878, 85.05112878)  # https://en.wikipedia.org/wiki/Mercator_projection#Truncation_and_aspect_ratio
 LONGITUDE_RANGE: Tuple[float, float] = (-180., 180.)
 # Due to the way quadkeys are represented as 64-bit integers (https://github.com/joekarl/binary-quadkey/blob/64f76a15465169df9d0d5e9e653906fb00d8fa48/example/java/src/main/java/com/joekarl/binaryQuadkey/BinaryQuadkey.java#L67),
 # we can not use 31 character quadkeys, but only 29, since five bits explicitly encode the zoom level
@@ -29,20 +29,30 @@ class TileAnchor(IntEnum):
 
 
 def valid_level(level: int) -> bool:
-    return LEVEL_RANGE[0] <= level <= LEVEL_RANGE[1]
+    try:
+        QuadKey.validate_level(level)
+        return True
+    except ValueError:
+        return False
 
 
 def valid_geo(lat: float, lon: float) -> bool:
-    return LATITUDE_RANGE[0] <= lat <= LATITUDE_RANGE[1] and LONGITUDE_RANGE[0] <= lon <= LONGITUDE_RANGE[1]
-
+    try:
+        QuadKey.validate_geo(lat, lon)
+        return True
+    except ValueError:
+        return False
 
 def valid_key(key: str) -> bool:
-    return KEY_PATTERN.match(key) is not None
-
+    try:
+        QuadKey.validate_key(key)
+        return True
+    except ValueError:
+        return False
 
 class QuadKey:
-    @precondition(lambda c, key: valid_key(key))
     def __init__(self, key: str):
+        self.validate_key(key)
         self.key: str = key
         tile_tuple: Tuple[Tuple[int, int], int] = tilesystem.quadkey_to_tile(self.key)
         self.tile: Tuple[int, int] = tile_tuple[0]
@@ -161,13 +171,30 @@ class QuadKey:
 
     @classmethod
     def from_geo(cls, geo: Tuple[float, float], level: int) -> 'QuadKey':
+        cls.validate_geo(*geo)
+        cls.validate_level(level)
+        
         pixel = tilesystem.geo_to_pixel(geo, level)
         tile = tilesystem.pixel_to_tile(pixel)
         key = tilesystem.tile_to_quadkey(tile, level)
         return cls(key)
+    
+    @staticmethod
+    def validate_level(level: int):
+        if not (LEVEL_RANGE[0] <= level <= LEVEL_RANGE[1]):
+            raise ValueError('got invalid zoom level')
+
+    @staticmethod
+    def validate_geo(lat: float, lon: float):
+        if not (LATITUDE_RANGE[0] <= lat <= LATITUDE_RANGE[1] and LONGITUDE_RANGE[0] <= lon <= LONGITUDE_RANGE[1]):
+            raise ValueError(f'got invalid lat / lon, bounds are {LATITUDE_RANGE} / {LONGITUDE_RANGE}')
+
+    @staticmethod
+    def validate_key(key: str):
+        if not (KEY_PATTERN.match(key) is not None):
+            raise ValueError('got invalid quadkey')
 
 
-@precondition(lambda geo, level: valid_geo(*geo) and valid_level(level))
 def from_geo(geo: Tuple[float, float], level: int) -> 'QuadKey':
     return QuadKey.from_geo(geo, level)
 
@@ -184,6 +211,6 @@ def from_int(qk_int: int) -> 'QuadKey':
     return QuadKey(tilesystem.quadint_to_quadkey(qk_int))
 
 
-@precondition(lambda geo: valid_geo(*geo))
 def geo_to_dict(geo: Tuple[float, float]) -> Dict[str, float]:
+    QuadKey.validate_geo(*geo)
     return {LAT_STR: geo[0], LON_STR: geo[1]}

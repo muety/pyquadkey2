@@ -5,8 +5,7 @@ from unittest import TestCase
 
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../../src'))
 
-from pyquadkey2.quadkey import TileAnchor
-from pyquadkey2.quadkey.tilesystem import tilesystem
+from pyquadkey2.quadkey import TileAnchor, tilesystem
 
 
 class TileSystemTest(TestCase):
