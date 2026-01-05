@@ -11,11 +11,40 @@ Built off of the TileSystem static class outlined here: http://msdn.microsoft.co
 Converts a lat,lon to pixel space to tile space to a quadkey 
 
 
-		import quadkey
+    import quadkey
 
-		qk = quadkey.from_geo((-105, 40), 17)
-		print qk.key # => 02310101232121212 
-		assert qk.level is 17
-		tile = qk.to_tile() # => [(x, y), z]
+    qk = quadkey.from_geo((-105, 40), 17)
+    print qk.key # => 02310101232121212 
+    assert qk.level is 17
+    tile = qk.to_tile() # => [(x, y), z]
 
 Not a lot of documentation here, but the implementation has quite a bit, so look at the QuadKey definitions for better documention
+
+
+Install
+-------
+
+The package on pypi is quadtweet, so the recommended installation is with pip
+
+     pip install quadkey
+
+Methods
+-------
+
+There are many straightforward methods, so I'll only go into detail of the unique ones
+
+* children()
+* parent()
+* is_ancestor()
+* is_descendent()
+* area()
+*
+
+###difference(to)
+
+Gets the quadkeys between self and to forming a rectangle, inclusive.
+
+###unwind()
+
+Gets a list of all ancestors in descending order by level, inclusive.
+
