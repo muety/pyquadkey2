@@ -14,7 +14,7 @@ with open('README.md', 'r', encoding='utf-8') as fh:
 
 setup(
     name='pyquadkey2',
-    version='0.3.2',
+    version='0.3.0',
     description='Python implementation of geographical tiling using QuadKeys as proposed by Microsoft',
     long_description=long_description,
     long_description_content_type='text/markdown',
@@ -41,7 +41,7 @@ setup(
         'Documentation': 'https://docs.muetsch.io/pyquadkey2/'
     },
     keywords='tiling quadkey quadtile geospatial geohash',
-    python_requires='>=3.6',
+    python_requires='>=3.10',
     ext_modules=[Extension('tilesystem', ['src/pyquadkey2/quadkey/tilesystem/tilesystem.c'])],
     ext_package='pyquadkey2'
 )

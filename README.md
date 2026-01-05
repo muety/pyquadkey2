@@ -24,7 +24,8 @@ project and adds:
 
 ## Installation
 ### Requirements
-This library requires **Python 3.6** or higher. To compile it from source, Cython is required in addition.
+
+This library requires **Python 3.10** or higher. To compile it from source, Cython is required in addition.
 
 ### Using Pip
 ```bash
@@ -35,8 +36,8 @@ Pip installation is only tested for Linux and Mac, yet. If you encounter problem
 
 ### From archive
 ```bash
-$ wget https://github.com/muety/pyquadkey2/releases/download/0.2.2/pyquadkey2-0.2.2.tar.gz
-$ pip install pyquadkey2-0.2.2.tar.gz
+$ wget https://github.com/muety/pyquadkey2/releases/download/0.3.0/pyquadkey2-0.3.0.tar.gz
+$ pip install pyquadkey2-0.3.0.tar.gz
 ```
 
 ### From source
@@ -69,6 +70,14 @@ $ cd src/pyquadkey2/quadkey/tilesystem && python setup.py build_ext --inplace &&
 
 # Install as module
 $ pip install .
+```
+
+## Developer Notes
+
+### Unit Tests
+
+```bash
+python tests/__init__.py
 ```
 
 ## License
