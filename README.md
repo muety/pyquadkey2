@@ -80,6 +80,18 @@ $ pip install .
 python tests/__init__.py
 ```
 
+### Release
+
+See [here](https://packaging.python.org/en/latest/tutorials/packaging-projects/).
+
+```bash
+pip install setuptools wheel auditwheel
+python -m build
+cd dist
+auditwheel repair *.whl
+twine upload --repository testpypi wheelhouse/* ../*.tar.gz
+```
+
 ## License
 Apache 2.0
 
