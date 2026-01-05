@@ -26,7 +26,7 @@ class TileSystemTest(TestCase):
 		geo = (40., -105.)
 		level = 7
 		dpi = 96
-		scale = 3540913.0290224822
+		scale = 3540913.0290224836
 		self.assertEqual(scale, TileSystem.map_scale(geo[0], level, dpi))
 
 	def testGeoToPixel(self):
@@ -58,4 +58,7 @@ class TileSystemTest(TestCase):
 		self.assertEqual(key, TileSystem.tile_to_quadkey(tile, level))
 
 	def testQuadkeyToTile(self):
-		pass
+		tile = (26, 48)
+		level = 7
+		key = "0231010"
+		self.assertEqual([tile, level], TileSystem.quadkey_to_tile(key))

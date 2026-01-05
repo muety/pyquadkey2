@@ -107,5 +107,18 @@ class TileSystem:
 	@staticmethod
 	def quadkey_to_tile(quadkey):
 		"""Transform quadkey to tile coordinates"""
-		pass
+		tile_x, tile_y = (0,0)
+		level = len(quadkey)
+		for i in xrange(level):
+			bit = level - i
+			mask = 1 << (bit - 1)
+			if quadkey[level - bit] == '1':
+				tile_x |= mask
+			if quadkey[level - bit] == '2':
+				tile_y |= mask
+			if quadkey[level - bit] == '3':
+				tile_x |= mask
+				tile_y |= mask
+		return [(tile_x, tile_y), level]
+				
 	
