@@ -5,7 +5,7 @@ from typing import Tuple, List, Iterable, Generator, Dict
 
 try:
     from pyquadkey2 import tilesystem
-except ModuleNotFoundError:
+except (ModuleNotFoundError, ImportError):
     from .tilesystem import tilesystem
 
 from .util import precondition

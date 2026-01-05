@@ -8,8 +8,8 @@ Get all children of the specified level.
 * `at_level` (default: 1): Level of the children keys to be returned. Has to be less than the current QuadKey's level.
 
 **Example:**
-```
-from quadkey import QuadKey
+```python
+from pyquadkey2.quadkey import QuadKey
 qk = QuadKey('0')
 qk.children(at_level=2) # -> ['000', '001', '002', '003', '010', '011', '012', '013', '020', '021', '022', '023', '030', '031', '032', '033']
 ```
@@ -32,8 +32,8 @@ Get all QuadKeys at the same level that are in the current key's neighborhood of
 
 Left: `n=1`, right: `n=2`
 
-```
-from quadkey import QuadKey
+```python
+from pyquadkey2.quadkey import QuadKey
 qk = QuadKey('032')
 qk.nearby()     # -> ['021', '031', '023', '033', '201', '032', '030', '211', '210']
 qk.nearby(n=2)  # -> ['023', '012', '022', '212', '210', '021', '033', '300', '203', '200', '030', '102', '003', '031', '302', '201', '032', '202', '120', '213', '002', '013', '122', '211', '020']
@@ -74,8 +74,8 @@ Returns all keys of the same level that are "between" (in two-dimensional space)
 
 ![](img/pyquadkey_difference.png)
 
-```
-from quadkey import QuadKey
+```python
+from pyquadkey2.quadkey import QuadKey
 qk1 = QuadKey('032')
 qk2 = QuadKey('011')
 qk1.difference(qk1) # -> [011, 013, 031, 033, 010, 012, 030, 032]
@@ -112,8 +112,8 @@ Returns the current key as 64-bit integer for better space efficiency.
 
 Similar to [difference](#difference), but as a static method. In addition this method accepts multiple keys and returns all keys, that are contained in a bounding box spanned by the two outer-most `quadkeys`.
 
-```
-from quadkey import QuadKey
+```python
+from pyquadkey2.quadkey import QuadKey
 qks = [QuadKey('032'), QuadKey('011')]
 QuadKey.bbox(qks)  # -> [011, 013, 031, 033, 010, 012, 030, 032]
 ```  

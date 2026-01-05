@@ -9,7 +9,7 @@ Creates a new `QuadKey` object from a tile's string representation.
 
 **Example:**
 ```python
-import quadkey
+from pyquadkey2 import quadkey
 qk = quadkey.from_str('010302121')                  # -> 010302121
 ```
 
@@ -20,7 +20,7 @@ Creates a new `QuadKey` object from a tile's integer representation
 
 **Example:**
 ```python
-import quadkey
+from pyquadkey2 import quadkey
 qk = quadkey.from_int(1379860704579813385)          # -> 010302121
 ```
 
@@ -31,6 +31,6 @@ Creates a new `QuadKey` object from geo / GNSS coordinates
 
 **Example:**
 ```python
-import quadkey
+from pyquadkey2 import quadkey
 qk = quadkey.from_geo((49.011011, 8.414971), 9)     # -> 120203233
 ```

@@ -24,7 +24,7 @@ This library requires **Python 3.6** or higher. To compile it by yourself, Cytho
 ### Using Pip
 * `pip3 install pyquadkey2`
 
-Pip installation is only tested for Linux, yet. If you encounter problems with the installation on Mac or Windows, please report them as a new issue.
+Pip installation is only tested for Linux and Mac, yet. If you encounter problems with the installation on Windows, please report them as a new issue.
 
 ### From archive
 * Download the latest [release](https://github.com/n1try/pyquadkey2/releases) as archive (`.tar.gz`) or wheel (`.whl`), e.g. `0.1.1.tar.gz`

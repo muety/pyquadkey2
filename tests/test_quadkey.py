@@ -1,8 +1,12 @@
+import os
+import sys
 import unittest
 from operator import attrgetter
 from unittest import TestCase
 
-import quadkey
+sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../src'))
+
+from pyquadkey2 import quadkey
 
 
 class QuadKeyTest(TestCase):

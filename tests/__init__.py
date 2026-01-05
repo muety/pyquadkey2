@@ -1,9 +1,13 @@
+import os
+import sys
 from unittest import TestLoader, TestSuite, TextTestRunner
+
+sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '..'))
 
 
 def run():
-    from test import test_quadkey, test_util
-    from test.tilesystem import test_tilesystem
+    from tests import test_quadkey, test_util
+    from tests.tilesystem import test_tilesystem
 
     loader: TestLoader = TestLoader()
     suite: TestSuite = TestSuite()

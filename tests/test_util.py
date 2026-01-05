@@ -1,10 +1,14 @@
+import os
+import sys
+import unittest
 from unittest import TestCase
 
-from quadkey.util import *
+sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../src'))
+
+from pyquadkey2.quadkey.util import *
 
 
 class UtilTest(TestCase):
-
     def testPrecondition(self):
         self.assertTrue(self.pre(True))
         with self.assertRaises(AssertionError):
@@ -16,3 +20,7 @@ class UtilTest(TestCase):
     @precondition(lambda c, x: x is True)
     def pre(self, x):
         return x
+
+
+if __name__ == '__main__':
+    unittest.main()
