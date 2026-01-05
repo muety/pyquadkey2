@@ -7,7 +7,7 @@ class QuadKey:
 		# assert lat, lon and level are valid
 		self.key = QuadKey.get_quadkey(geo, level)
 		self.geo = geo
-		self.latititude = geo[0]
+		self.latitude = geo[0]
 		self.longitude = geo[1]
 		self.level = level
 
