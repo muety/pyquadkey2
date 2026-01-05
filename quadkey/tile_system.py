@@ -82,9 +82,13 @@ class TileSystem:
 		return pixel[0] / 256, pixel[1] / 256
 
 	@staticmethod
-	def tile_to_pixel(tile):
+	def tile_to_pixel(tile, centered=False):
 		"""Transform tile to pixel coordinates"""
-		return tile[0] * 256, tile[1] * 256
+		pixel = [tile[0] * 256, tile[1] * 256]
+		if centered:
+			#should clip on max map size
+			pixel = [pix + 128 for pix in pixel]
+		return pixel[0], pixel[1]
 
 	@staticmethod
 	@precondition(lambda tile, lvl: valid_level(lvl))

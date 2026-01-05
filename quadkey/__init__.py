@@ -8,7 +8,7 @@ class QuadKey:
 		"""
 		A quadkey must be between 1 and 23 digits and can only contain digit[0-3]
 		"""
-		self.key = key 
+		self.key = key
 		self.level = len(key)
 		
 	def children(self):
@@ -31,7 +31,7 @@ class QuadKey:
 			Get the difference in level
 			If not, None
 		"""
-		if self.level <= node.level or self.key[:len(node.key)] != node.key: 
+		if self.level <= node.level or self.key[:len(node.key)] != node.key:
 			return None
 		return self.level - node.level
 
@@ -53,11 +53,11 @@ class QuadKey:
 	def to_tile(self):
 		return TileSystem.quadkey_to_tile(self.key)
 
-	def to_geo(self):
+	def to_geo(self, centered=False):
 		ret = TileSystem.quadkey_to_tile(self.key)
 		tile = ret[0]
 		lvl = ret[1]
-		pixel = TileSystem.tile_to_pixel(tile)
+		pixel = TileSystem.tile_to_pixel(tile, centered)
 		return TileSystem.pixel_to_geo(pixel, lvl)
 
 	def __eq__(self, other):
@@ -84,7 +84,7 @@ class QuadKey:
 		pixel = TileSystem.geo_to_pixel(geo, level)
 		tile = TileSystem.pixel_to_tile(pixel)
 		key = TileSystem.tile_to_quadkey(tile, level)
-		return QuadKey(key) 
+		return QuadKey(key)
 
 	@staticmethod
 	def from_tile(tile, level):

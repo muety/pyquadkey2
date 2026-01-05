@@ -3,7 +3,7 @@
 from setuptools import setup
 
 setup(name="quadkey",
-		version="0.0.3",
+		version="0.0.4",
 		description="Python Implementation for Geospatial Quadkeys",
 		author="Buck Heroux",
 		url="https://github.com/buckheroux/QuadKey",
