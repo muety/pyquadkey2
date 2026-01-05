@@ -38,13 +38,17 @@ There are many straightforward methods, so I'll only go into detail of the uniqu
 * is_ancestor()
 * is_descendent()
 * area()
-*
+* to_geo()
+* to_tile()
 
-###difference(to)
+####difference(to)
 
 Gets the quadkeys between self and to forming a rectangle, inclusive.
 
-###unwind()
+    qk.difference(to) -> [qk,,,,,to]
+
+####unwind()
 
 Gets a list of all ancestors in descending order by level, inclusive.
 
+    QuadKey('0123').unwind() -> ['0123','012','01','0']
