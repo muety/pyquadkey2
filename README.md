@@ -64,14 +64,10 @@ $ git clone https://github.com/muety/pyquadkey2
 $ python -m venv ./venv
 $ source venv/bin/activate
 
-# Install depencencies
-$ pip install -r requirements.txt
-
-# Compile
-$ cd src/pyquadkey2/quadkey/tilesystem && python setup.py build_ext --inplace && cd ../../../..
-
-# Install as module
-$ pip install .
+# Install build
+$ pip install build
+# build
+$ python -m build
 ```
 
 ## Developer Notes
@@ -87,11 +83,8 @@ python tests/__init__.py
 See [here](https://packaging.python.org/en/latest/tutorials/packaging-projects/).
 
 ```bash
-pip install setuptools wheel auditwheel
-python -m build
 cd dist
-auditwheel repair *.whl
-twine upload --repository testpypi wheelhouse/* ./*.tar.gz
+twine upload --repository testpypi *
 ```
 
 ## License
