@@ -29,15 +29,14 @@ jobs:
         with:
           python-version: "3.x"
 
-      - name: Install dependencies
-        run: python3 -m pip install --upgrade pytest
       - name: Build Wheel
         uses: pypa/cibuildwheel@v2.22.0
         env:
           CIBW_PRERELEASE_PYTHONS: True
           CIBW_FREE_THREADED_SUPPORT: True
           CIBW_BUILD: ${{ matrix.python }}-${{ matrix.buildplat[1] }}
-          CIBW_TEST_COMMAND: cd {project} && python3 -m unittest -v tests/test_*.py tests/*/test_*.py
+          CIBW_TEST_REQUIRES: pytest
+          CIBW_TEST_COMMAND: pytest -v {project} --import-mode=importlib
 
       - name: Upload Wheel
         uses: actions/upload-artifact@v4
