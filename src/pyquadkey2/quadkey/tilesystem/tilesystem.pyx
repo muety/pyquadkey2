@@ -60,7 +60,7 @@ cpdef (double, double) pixel_to_geo((double, double) pixel, const long level):
     y = 0.5 - (clip(pixel_y, (0, ms - 1)) / ms)
     lat = 90 - 360 * math.atan(math.exp(-y * 2 * math.pi)) / math.pi
     lon = 360 * x
-    return math.round(lat * 1e6) / 1e6, math.round(lon * 1e6) / 1e6
+    return math.round(lat * 1e12) / 1e12, math.round(lon * 1e12) / 1e12
 
 cpdef (long, long) pixel_to_tile(const (long, long) pixel):
     return pixel[0] // 256, pixel[1] // 256
@@ -70,7 +70,7 @@ cpdef (long, long) tile_to_pixel(const (long, long) tile, tile_anchor anchor):
     pixel = [tile[0] * 256, tile[1] * 256]
     if anchor == ANCHOR_CENTER:
         # TODO: should clip on max map size
-        pixel = [pixel[0] + 256, pixel[1] + 256]
+        pixel = [pixel[0] + 128, pixel[1] + 128]
     elif anchor == ANCHOR_NE:
         pixel = [pixel[0] + 256, pixel[1]]
     elif anchor == ANCHOR_SW:

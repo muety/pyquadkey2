@@ -19,13 +19,17 @@ class TileSystemTest(TestCase):
         self.assertEqual(tilesystem.geo_to_pixel((40., 180.), 7), tilesystem.geo_to_pixel((40., 181.), 7))
 
     def testPixelToGeo(self):
-        self.assertEqual((40.002372, -104.996338), tilesystem.pixel_to_geo((6827, 12405), 7))
+        self.assertEqual((40.002371935876, -104.996337890625), tilesystem.pixel_to_geo((6827, 12405), 7))
 
     def testPixelToTile(self):
         self.assertEqual((26, 48), tilesystem.pixel_to_tile((6827, 12405)))
 
     def testTileToPixel(self):
-        self.assertEqual((6656, 12288), tilesystem.tile_to_pixel((26, 48), TileAnchor.ANCHOR_NW))
+        self.assertEqual((1124460032, 737651200), tilesystem.tile_to_pixel((4392422, 2881450), TileAnchor.ANCHOR_NW))
+        self.assertEqual((1124460288, 737651200), tilesystem.tile_to_pixel((4392422, 2881450), TileAnchor.ANCHOR_NE))
+        self.assertEqual((1124460032, 737651456), tilesystem.tile_to_pixel((4392422, 2881450), TileAnchor.ANCHOR_SW))
+        self.assertEqual((1124460288, 737651456), tilesystem.tile_to_pixel((4392422, 2881450), TileAnchor.ANCHOR_SE))
+        self.assertEqual((1124460160, 737651328), tilesystem.tile_to_pixel((4392422, 2881450), TileAnchor.ANCHOR_CENTER))
 
     def testTileToQuadkey(self):
         self.assertEqual('0231010', tilesystem.tile_to_quadkey((26, 48), 7))
