@@ -32,8 +32,7 @@ jobs:
       - name: Build Wheel
         uses: pypa/cibuildwheel@v2.22.0
         env:
-          CIBW_PRERELEASE_PYTHONS: True
-          CIBW_FREE_THREADED_SUPPORT: True
+          CIBW_ENABLE: cpython-prerelease cpython-freethreading
           CIBW_BUILD: ${{ matrix.python }}-${{ matrix.buildplat[1] }}
           CIBW_TEST_REQUIRES: pytest
           CIBW_TEST_COMMAND: pytest -v {project} --import-mode=importlib
