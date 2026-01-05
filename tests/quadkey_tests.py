@@ -46,5 +46,5 @@ class QuadKeyTest(TestCase):
 		qk = QuadKey('01')
 		print qk
 		print qk.nearby()
-		self.assertEqual(set(['00','10','02','03',,'13','33','32','23']), set(qk.nearby()))
+		self.assertEqual(set(['00','10','02','03','13','33','32','23']), set(qk.nearby()))
 

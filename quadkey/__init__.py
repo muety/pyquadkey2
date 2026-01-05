@@ -4,7 +4,6 @@ from tile_system import TileSystem, valid_key
 class QuadKey:
 
 	@precondition(lambda c, key: valid_key(key))
-
 	def __init__(self, key):
 		"""
 		A quadkey must be between 1 and 23 digits and can only contain digit[0-3]
@@ -54,12 +53,12 @@ class QuadKey:
 	def to_tile(self):
 		return TileSystem.quadkey_to_tile(self.key)
 
-  def to_geo(self):
-    ret = TileSystem.quadkey_to_tile(self.key)
-    tile = ret[0]
-    lvl = ret[1]
-    pixel = TileSystem.tile_to_pixel(tile)
-    return TileSystem.pixel_to_geo(pixel, lvl)
+	def to_geo(self):
+		et = TileSystem.quadkey_to_tile(self.key)
+		tile = ret[0]
+		lvl = ret[1]
+		pixel = TileSystem.tile_to_pixel(tile)
+		return TileSystem.pixel_to_geo(pixel, lvl)
 
 	def __eq__(self, other):
 		return self.key == other.key
@@ -87,6 +86,6 @@ class QuadKey:
 		key = TileSystem.tile_to_quadkey(tile, level)
 		return QuadKey(key) 
 
-  @staticmethod
-  def from_tile(tile, level):
-    return QuadKey(TileSystem.tile_to_quadkey(tile, level))
+	@staticmethod
+	def from_tile(tile, level):
+		return QuadKey(TileSystem.tile_to_quadkey(tile, level))
