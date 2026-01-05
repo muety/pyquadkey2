@@ -115,5 +115,6 @@ class QuadKeyTest(TestCase):
         qk = quadkey.QuadKey(''.join(['0'] * 10))
         self.assertEqual(int(qk.area()), 1531607591)
 
+
 if __name__ == '__main__':
     unittest.main()
