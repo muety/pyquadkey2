@@ -14,7 +14,10 @@ class QuadKeyTest(TestCase):
 		pass
 
 	def testGetQuadKey(self):
-		pass
+		geo = (40, -105)
+		level = 9
+		key = '023101012'
+		self.assertEqual(key, QuadKey.get_quadkey(geo, level))
 
 	def testGetCoordinates(self):
 		pass

@@ -3,11 +3,10 @@ from tile_system import TileSystem
 
 class QuadKey:
 
-	def __init__(self, lat, lon, level):
+	def __init__(self, geo, level):
 		# assert lat, lon and level are valid
-		self.key = QuadKey.get_quadkey(lat, lon, level)
-		self.lat = lat
-		self.lon = lon
+		self.key = QuadKey.get_quadkey(geo, level)
+		self.geo = geo
 		self.level = level
 
 	def __str__(self):
@@ -19,12 +18,16 @@ class QuadKey:
 	@classmethod
 	def from_str(cls, key):
 		level = len(key)
-		lat, lon = QuadKey.get_coordinates(key)
-		return cls(lat, lon, level)
+		geo = QuadKey.get_coordinates(key)
+		return cls(geo, level)
 
 	@staticmethod
-	def get_quadkey(lat, lon, level):	
-		pass
+	def get_quadkey(geo, level):	
+		pixel = TileSystem.geo_to_pixel(geo, level)
+		tile = TileSystem.pixel_to_tile(pixel)
+		quadkey = TileSystem.tile_to_quadkey(tile, level)
+		print geo, pixel, tile, quadkey
+		return quadkey
 
 	@staticmethod
 	def get_coordinates(key):

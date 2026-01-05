@@ -24,19 +24,28 @@ class TileSystemTest(TestCase):
 		TileSystem.map_scale(45, 7, 45)
 
 	def testGeoToPixel(self):
+		geo = (-105, 45)
+		level = 7
 		TileSystem.geo_to_pixel(geo, level)
 
 	def testPixelToGeo(self):
+		pixel = (50, 45)
+		level = 7
 		TileSystem.pixel_to_geo(pixel, level)
 
 	def testPixelToTile(self):
+		pixel = (50, 45)
 		TileSystem.pixel_to_tile(pixel)
 
 	def testTileToPixel(self):
+		tile = (3,3)
 		TileSystem.tile_to_pixel(tile)
 
 	def testTileToQuadkey(self):
+		tile = (3,3)
+		level = 7
 		TileSystem.tile_to_quadkey(tile, level)
 
 	def testQuadkeyToTile(self):
+		quadkey = '00'
 		TileSystem.quadkey_to_tile(quadkey)
