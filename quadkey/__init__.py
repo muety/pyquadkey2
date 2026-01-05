@@ -54,6 +54,13 @@ class QuadKey:
 	def to_tile(self):
 		return TileSystem.quadkey_to_tile(self.key)
 
+  def to_geo(self):
+    ret = TileSystem.quadkey_to_tile(self.key)
+    tile = ret[0]
+    lvl = ret[1]
+    pixel = TileSystem.tile_to_pixel(tile)
+    return TileSystem.pixel_to_geo(pixel, lvl)
+
 	def __eq__(self, other):
 		return self.key == other.key
 
@@ -79,3 +86,7 @@ class QuadKey:
 		tile = TileSystem.pixel_to_tile(pixel)
 		key = TileSystem.tile_to_quadkey(tile, level)
 		return QuadKey(key) 
+
+  @staticmethod
+  def from_tile(tile, level):
+    return QuadKey(TileSystem.tile_to_quadkey(tile, level))
