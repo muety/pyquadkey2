@@ -2,13 +2,14 @@ from unittest import TestLoader, TestSuite, TextTestRunner
 
 
 def run():
-    from test import quadkey_test, tilesystem_test, util_test
+    from test import test_quadkey, test_util
+    from test.tilesystem import test_tilesystem
 
     loader: TestLoader = TestLoader()
     suite: TestSuite = TestSuite()
-    suite.addTests(loader.loadTestsFromModule(quadkey_test))
-    suite.addTests(loader.loadTestsFromModule(tilesystem_test))
-    suite.addTests(loader.loadTestsFromModule(util_test))
+    suite.addTests(loader.loadTestsFromModule(test_quadkey))
+    suite.addTests(loader.loadTestsFromModule(test_tilesystem))
+    suite.addTests(loader.loadTestsFromModule(test_util))
     TextTestRunner().run(suite)
 
 
