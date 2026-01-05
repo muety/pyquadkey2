@@ -4,6 +4,7 @@ from tile_system import TileSystem, valid_key
 class QuadKey:
 
 	@precondition(lambda c, key: valid_key(key))
+
 	def __init__(self, key):
 		"""
 		A quadkey must be between 1 and 23 digits and can only contain digit[0-3]
@@ -49,6 +50,9 @@ class QuadKey:
 		res = TileSystem.ground_resolution(LAT, self.level)
 		side = (size / 2) * res
 		return side*side
+
+	def to_tile(self):
+		return TileSystem.quadkey_to_tile(self.key)
 
 	def __eq__(self, other):
 		return self.key == other.key
