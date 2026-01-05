@@ -119,6 +119,13 @@ class QuadKeyTest(TestCase):
         qk = quadkey.QuadKey(''.join(['0'] * 10))
         self.assertEqual(int(qk.area()), 1531607591)
 
+    def testInheritance(self):
+        class TestQuadClass(quadkey.QuadKey):
+            def method1(self):
+                return f'QuadKey: {self}'
+            def method2(self):
+                return self.parent().method1()
+        TestQuadClass('033').method2()
 
 if __name__ == '__main__':
     unittest.main()
