@@ -14,7 +14,7 @@ Converts a lat,lon to pixel space to tile space to a quadkey
     import quadkey
 
     qk = quadkey.from_geo((-105, 40), 17)
-    print qk.key # => 02310101232121212 
+    print(qk.key) # => 02310101232121212 
     assert qk.level is 17
     tile = qk.to_tile() # => [(x, y), z]
 
@@ -24,7 +24,7 @@ Not a lot of documentation here, but the implementation has quite a bit, so look
 Install
 -------
 
-The package on pypi is quadtweet, so the recommended installation is with pip
+The package on PyPI is quadkey, so the recommended installation is with pip
 
      pip install quadkey
 
@@ -38,16 +38,19 @@ There are many straightforward methods, so I'll only go into detail of the uniqu
 * is_ancestor()
 * is_descendent()
 * area()
+* side()
+* nearby()
 * to_geo()
 * to_tile()
+* to_pixel()
 
-####difference(to)
+#### difference(to)
 
 Gets the quadkeys between self and to forming a rectangle, inclusive.
 
     qk.difference(to) -> [qk,,,,,to]
 
-####unwind()
+#### unwind()
 
 Gets a list of all ancestors in descending order by level, inclusive.
 

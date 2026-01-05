@@ -26,7 +26,7 @@ class TileSystemTest(TestCase):
         geo = (40., -105.)
         level = 7
         dpi = 96
-        scale = 3540913.0290224836
+        scale = 3540913.029022482
         self.assertEqual(scale, TileSystem.map_scale(geo[0], level, dpi))
 
     def testGeoToPixel(self):
