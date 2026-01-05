@@ -109,6 +109,9 @@ class QuadKey:
     def __repr__(self):
         return self.key
 
+    def __hash__(self):
+        return hash(self.key)
+
 def from_geo(geo, level):
     """
     Constucts a quadkey representation from geo and level
