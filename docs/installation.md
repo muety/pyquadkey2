@@ -12,8 +12,8 @@ Pip installation is only tested for Linux and Mac, yet. If you encounter problem
 
 ### From archive
 ```bash
-$ wget https://github.com/muety/pyquadkey2/releases/download/0.3.1/pyquadkey2-0.3.1.tar.gz
-$ pip install pyquadkey2-0.3.1.tar.gz
+$ wget https://github.com/muety/pyquadkey2/releases/download/0.3.2/pyquadkey2-0.3.2.tar.gz
+$ pip install pyquadkey2-0.3.2.tar.gz
 ```
 
 ### From source

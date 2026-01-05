@@ -22,6 +22,8 @@ project and adds:
 * ✅ 64-bit integer representation of QuadKeys
 * ✅ Additional features and convenience methods
 
+**Please note:** This library is still in development and not considered 100 % stable. You may want to consider [mercantile](https://github.com/mapbox/mercantile/) as an alternative (pure Python) implementation of QuadKeys. Also check [_What the Tile?_](https://labs.mapbox.com/what-the-tile/).
+
 ## Installation
 ### Requirements
 
@@ -36,8 +38,8 @@ Pip installation is only tested for Linux and Mac, yet. If you encounter problem
 
 ### From archive
 ```bash
-$ wget https://github.com/muety/pyquadkey2/releases/download/0.3.1/pyquadkey2-0.3.1.tar.gz
-$ pip install pyquadkey2-0.3.1.tar.gz
+$ wget https://github.com/muety/pyquadkey2/releases/download/0.3.2/pyquadkey2-0.3.2.tar.gz
+$ pip install pyquadkey2-0.3.2.tar.gz
 ```
 
 ### From source
