@@ -1,9 +1,12 @@
 from util import precondition
 from math import sin, cos, atan, exp, log, pi
+from decimal import *
 
 def valid_level(level):
 	LEVEL_RANGE = (1,23)
 	return LEVEL_RANGE[0] <= level <= LEVEL_RANGE[1]
+
+getcontext().prec = 6
 
 class TileSystem:
 	"""
@@ -44,16 +47,17 @@ class TileSystem:
 	@precondition(lambda geo, lvl: valid_level(lvl))
 	def geo_to_pixel(geo, level):
 		"""Transform from geo coordinates to pixel coordinates"""
-		lat, lon = geo
+		lat, lon = float(geo[0]), float(geo[1])
 		lat = TileSystem.clip(lat, TileSystem.LATITUDE_RANGE)
 		lon = TileSystem.clip(lon, TileSystem.LONGITUDE_RANGE)
 		x = (lon + 180) / 360
 		sin_lat = sin(lat * pi / 180)
-		y = 0.5 - log((1 + sin_lat) / (1 - sin_lat) / (4 * pi))
+		y = 0.5 - log((1 + sin_lat) / (1 - sin_lat)) / (4 * pi)
 		# might need to cast to uint
 		map_size = TileSystem.map_size(level)
 		pixel_x = int(TileSystem.clip(x * map_size + 0.5, (0, map_size - 1)))
 		pixel_y = int(TileSystem.clip(y * map_size + 0.5, (0, map_size - 1)))
+		# print '\n'+str( ((lat, lon), sin_lat, (x, y), map_size, (pixel_x, pixel_y)) )+'\n'
 		return pixel_x, pixel_y
 
 	@staticmethod
@@ -67,7 +71,7 @@ class TileSystem:
 		y = 0.5 - ( TileSystem.clip(pixel_y, (0, map_size - 1)) / map_size)
 		lat = 90 - 360 * atan(exp(-y * 2 * pi)) / pi
 		lon = 360 * x
-		return lat, lon
+		return round(lat,6), round(lon,6)
 
 	@staticmethod
 	def pixel_to_tile(pixel):

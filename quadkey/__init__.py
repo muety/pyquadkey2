@@ -7,6 +7,8 @@ class QuadKey:
 		# assert lat, lon and level are valid
 		self.key = QuadKey.get_quadkey(geo, level)
 		self.geo = geo
+		self.latititude = geo[0]
+		self.longitude = geo[1]
 		self.level = level
 
 	def __str__(self):
@@ -26,7 +28,6 @@ class QuadKey:
 		pixel = TileSystem.geo_to_pixel(geo, level)
 		tile = TileSystem.pixel_to_tile(pixel)
 		quadkey = TileSystem.tile_to_quadkey(tile, level)
-		print geo, pixel, tile, quadkey
 		return quadkey
 
 	@staticmethod

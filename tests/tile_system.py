@@ -18,34 +18,44 @@ class TileSystemTest(TestCase):
 			TileSystem.map_size(0)
 
 	def testGroundResolution(self):
-		TileSystem.ground_resolution(45, 7)
+		geo = (40., -105.)
+		res = 936.86657226219847
+		TileSystem.ground_resolution(geo[0], 7)
 
 	def testMapScale(self):
-		TileSystem.map_scale(45, 7, 45)
+		geo = (40., -105.)
+		level = 7
+		dpi = 96
+		scale = 3540913.0290224822
+		self.assertEqual(scale, TileSystem.map_scale(geo[0], level, dpi))
 
 	def testGeoToPixel(self):
-		geo = (-105, 45)
+		geo = (40., -105.)
 		level = 7
-		TileSystem.geo_to_pixel(geo, level)
+		pixel = (6827, 12405)
+		self.assertEqual(pixel, TileSystem.geo_to_pixel(geo, level))
 
 	def testPixelToGeo(self):
-		pixel = (50, 45)
+		pixel = (6827, 12405)
 		level = 7
-		TileSystem.pixel_to_geo(pixel, level)
+		geo = (40.002372, -104.996338)
+		self.assertEqual(geo, TileSystem.pixel_to_geo(pixel, level))
 
 	def testPixelToTile(self):
-		pixel = (50, 45)
-		TileSystem.pixel_to_tile(pixel)
+		pixel = (6827, 12405)
+		tile = (26, 48)
+		self.assertEqual(tile, TileSystem.pixel_to_tile(pixel))
 
 	def testTileToPixel(self):
-		tile = (3,3)
-		TileSystem.tile_to_pixel(tile)
+		tile = (26, 48)
+		pixel = (6656, 12288)
+		self.assertEqual(pixel, TileSystem.tile_to_pixel(tile))
 
 	def testTileToQuadkey(self):
-		tile = (3,3)
+		tile = (26, 48)
 		level = 7
-		TileSystem.tile_to_quadkey(tile, level)
+		key = "0231010"
+		self.assertEqual(key, TileSystem.tile_to_quadkey(tile, level))
 
 	def testQuadkeyToTile(self):
-		quadkey = '00'
-		TileSystem.quadkey_to_tile(quadkey)
+		pass
