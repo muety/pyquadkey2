@@ -26,6 +26,7 @@ class QuadKeyTest(TestCase):
 
     def testFromGeo(self):
         self.assertEqual('1202032333311320', quadkey.from_geo((49.014205, 8.420025), 16).key)
+        self.assertEqual('311213', quadkey.from_geo((-27.052395, 152.97702), 6).key)  # https://github.com/muety/pyquadkey2/issues/13
 
     def testFromGeoInvalidLevel(self):
         with self.assertRaises(AssertionError):
