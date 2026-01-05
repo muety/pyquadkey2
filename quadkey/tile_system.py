@@ -3,8 +3,13 @@ from math import sin, cos, atan, exp, log, pi
 
 
 def valid_level(level):
-    LEVEL_RANGE = (1, 23)
+    LEVEL_RANGE = (1, 31)
     return LEVEL_RANGE[0] <= level <= LEVEL_RANGE[1]
+
+
+def valid_geo(lat, lon):
+    return TileSystem.LATITUDE_RANGE[0] <= lat <= TileSystem.LATITUDE_RANGE[1] \
+        and TileSystem.LONGITUDE_RANGE[0] <= lon <= TileSystem.LONGITUDE_RANGE[1] \
 
 
 @precondition(lambda key: valid_level(len(key)))
