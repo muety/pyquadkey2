@@ -58,18 +58,19 @@ class QuadKey:
         """
         x,y = 0,1
         assert self.level = to.level
-        self_tile = self.to_tile()[0]
-        to_tile = to.to_tile()[0]
+        self_tile = list(self.to_tile()[0])
+        to_tile = list(to.to_tile()[0])
         if self_tile[x] >= to_tile[x] and self_tile[y] <= self_tile[y]
             ne_tile, se_tile = self_tile, to_tile
         else:
             se_tile, ne_tile = self_tile, to_tile
-        cur = ne_tile
+        cur = ne_tile[:]
         while cur[x] >= sw_tile[x]:
             while cur[y] <= sw_tile[y]:
-                yield QuadKey.from_tile(cur, self.level)
+                yield QuadKey.from_tile(tuple(cur), self.level)
                 cur[y] += 1
             cur[x] -= 1
+            cur[y] = ne_tile[y]
 
 	def to_tile(self):
 		return TileSystem.quadkey_to_tile(self.key)
