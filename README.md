@@ -74,7 +74,8 @@ $ python -m build
 ### Unit Tests
 
 ```bash
-python tests/__init__.py
+PYTHONPATH=./src python3 -m unittest tests/**/test_*.py
+# Use env PYTHONPATH=./src as a option to choose test on src or test on installed package
 ```
 
 ### Release
