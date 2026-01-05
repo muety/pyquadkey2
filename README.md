@@ -29,17 +29,17 @@ project and adds:
 
 This library requires **Python 3.10** or higher. To compile it from source, Cython is required in addition.
 
-### Using Pip
+### Using Pip / uv
 ```bash
-$ pip install pyquadkey2
+$ pip install pyquadkey2  # or uv add pyquadkey2
 ```
 
-Pip installation is only tested for Linux and Mac, yet. If you encounter problems with the installation on Windows, please report them as a new issue.
+Pip / uv installation is only tested for Linux and Mac, yet. If you encounter problems with the installation on Windows, please report them as a new issue.
 
 ### From archive
 ```bash
-$ wget https://github.com/muety/pyquadkey2/releases/download/0.3.3/pyquadkey2-0.3.3.tar.gz
-$ pip install pyquadkey2-0.3.3.tar.gz
+$ wget https://github.com/muety/pyquadkey2/releases/download/0.3.4/pyquadkey2-0.3.4.tar.gz
+$ pip install pyquadkey2-0.3.4.tar.gz
 ```
 
 ### From source
@@ -60,13 +60,11 @@ $ pip install pyquadkey2-0.3.3.tar.gz
 # Check out repo
 $ git clone https://github.com/muety/pyquadkey2
 
-# Create and active virtual environment (optional)
-$ python -m venv ./venv
-$ source venv/bin/activate
+# Init venv and install dependencies
+$ uv sync
 
-# Install dependencies and run the build
-$ pip install build
-$ python -m build
+# Build distribution package
+$ uv build
 ```
 
 ## Developer Notes
