@@ -38,8 +38,8 @@ Pip installation is only tested for Linux and Mac, yet. If you encounter problem
 
 ### From archive
 ```bash
-$ wget https://github.com/muety/pyquadkey2/releases/download/0.3.2/pyquadkey2-0.3.2.tar.gz
-$ pip install pyquadkey2-0.3.2.tar.gz
+$ wget https://github.com/muety/pyquadkey2/releases/download/0.3.3/pyquadkey2-0.3.3.tar.gz
+$ pip install pyquadkey2-0.3.3.tar.gz
 ```
 
 ### From source
@@ -74,7 +74,11 @@ $ python -m build
 ### Unit Tests
 
 ```bash
-python tests/__init__.py
+# Use env PYTHONPATH=./src as a option to choose test on src or test on installed package
+PYTHONPATH=./src python3 -m unittest -v tests/test_*.py tests/*/test_*.py
+
+# Or use pytest to make your life easier
+pytest
 ```
 
 ### Release
