@@ -12,13 +12,13 @@ with open('README.md', 'r', encoding='utf-8') as fh:
 
 setup(
     name='pyquadkey2',
-    version='0.2.0',
+    version='0.2.1',
     description='Python implementation of geographical tiling using QuadKeys as proposed by Microsoft',
     long_description=long_description,
     long_description_content_type='text/markdown',
     author='Ferdinand Mütsch',
     author_email='ferdinand@muetsch.io',
-    url='https://github.com/n1try/pyquadkey2',
+    url='https://github.com/muety/pyquadkey2',
     packages=find_packages('src'),
     package_dir={'': 'src'},
     classifiers=[
@@ -34,8 +34,8 @@ setup(
         'Typing :: Typed'
     ],
     project_urls={
-        'Bug Tracker': 'https://github.com/n1try/pyquadkey2/issues',
-        'Source Code': 'https://github.com/n1try/pyquadkey2',
+        'Bug Tracker': 'https://github.com/muety/pyquadkey2/issues',
+        'Source Code': 'https://github.com/muety/pyquadkey2',
         'Documentation': 'https://docs.muetsch.io/pyquadkey2/'
     },
     keywords='tiling quadkey quadtile geospatial geohash',

@@ -5,5 +5,5 @@ nav:
   - Documentation:
       - 'Instantiation': 'instantiation.md'
       - 'Methods': 'methods.md'
-  - GitHub: 'https://github.com/n1try/pyquadkey2'
+  - GitHub: 'https://github.com/muety/pyquadkey2'
 theme: 'readthedocs'
