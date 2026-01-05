@@ -94,20 +94,21 @@ class QuadKey:
 	def __repr__(self):
 		return self.key
 
-	@staticmethod
-	def from_geo(geo, level):
-		"""
-		Constucts a quadkey representation from geo and level
-		geo => (lat, lon)
-		If lat or lon are outside of bounds, they will be clipped
-		If level is outside of bounds, an AssertionError is raised
+def from_geo(geo, level):
+    """
+    Constucts a quadkey representation from geo and level
+    geo => (lat, lon)
+    If lat or lon are outside of bounds, they will be clipped
+    If level is outside of bounds, an AssertionError is raised
 
-		"""
-		pixel = TileSystem.geo_to_pixel(geo, level)
-		tile = TileSystem.pixel_to_tile(pixel)
-		key = TileSystem.tile_to_quadkey(tile, level)
-		return QuadKey(key)
+    """
+    pixel = TileSystem.geo_to_pixel(geo, level)
+    tile = TileSystem.pixel_to_tile(pixel)
+    key = TileSystem.tile_to_quadkey(tile, level)
+    return QuadKey(key)
 
-	@staticmethod
-	def from_tile(tile, level):
-		return QuadKey(TileSystem.tile_to_quadkey(tile, level))
+def from_tile(tile, level):
+    return QuadKey(TileSystem.tile_to_quadkey(tile, level))
+
+def from_str(qk_str):
+    return QuadKey(qk_str)
