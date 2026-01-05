@@ -1,0 +1,48 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pyquadkey2"
+version = "0.3.2"
+authors = [
+    { name = "Ferdinand Mütsch", email = "ferdinand@muetsch.io" },
+]
+maintainers = [
+    { name = "Ferdinand Mütsch", email = "ferdinand@muetsch.io" },
+    { name = "CoreJa", email = "i@coreja.com" }
+]
+description = 'Python implementation of geographical tiling using QuadKeys as proposed by Microsoft'
+classifiers = [
+    'Development Status :: 4 - Beta',
+    'Programming Language :: Python :: 3',
+    'Programming Language :: Cython',
+    'License :: OSI Approved :: Apache Software License',
+    'Operating System :: MacOS',
+    'Operating System :: Unix',
+    'Operating System :: POSIX :: Linux',
+    'Natural Language :: English',
+    'Topic :: Scientific/Engineering :: GIS',
+    'Typing :: Typed'
+]
+readme = "README.md"
+requires-python = ">=3.10"
+keywords = ['tiling', 'quadkey', 'quadtile', 'geospatial', 'geohash']
+license = { file = "LICENSE" }
+
+[project.urls]
+'Homepage' = 'https://github.com/muety/pyquadkey2'
+'Bug Tracker' = 'https://github.com/muety/pyquadkey2/issues'
+'Source Code' = 'https://github.com/muety/pyquadkey2'
+'Documentation' = 'https://docs.muetsch.io/pyquadkey2/'
+
+[tool.hatch.build.targets.sdist]
+include = ["src/pyquadkey2"]
+
+[tool.hatch.build.targets.wheel]
+only-packages = true
+artifacts = ["*.so", "*.pyd", "*.dll", "*.dylib"]
+
+[tool.hatch.build.targets.wheel.hooks.cython]
+dependencies = ["hatch-cython", "cython"]
+options = { compile_py = false }
