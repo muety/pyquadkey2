@@ -1,5 +1,9 @@
 from util import precondition
-from math import cos
+from math import cos, pi
+
+def valid_level(level):
+	LEVEL_RANGE = (1,23)
+	return LEVEL_RANGE[0] <= level <= LEVEL_RANGE[1]
 
 class TileSystem:
 	"""
@@ -11,9 +15,6 @@ class TileSystem:
 	EARTH_RADIUS = 6378137
 	LATITUDE_RANGE = (-85.05112878, 85.05112878)
 	LONGITUDE_RANGE = (-180., 180.)
-	LEVEL_RANGE = (1,23)
-
-	valid_level = lambda level: TileSystem.LEVEL_RANGE[0] <= level <= TileSystem.LEVEL_RANGE[1]
 
 	@staticmethod
 	@precondition(lambda n, minMax: minMax[0] <= minMax[1])
@@ -28,14 +29,14 @@ class TileSystem:
 		return 256 << level
 
 	@staticmethod
-	@precondition(valid_level(*args[1]))
-	def ground_resolution(float lat, int level):
+	@precondition(lambda lat, lvl: valid_level(lvl))
+	def ground_resolution(lat, level):
 		"""Gets ground res in meters / pixel"""
-		lat = TileSystem.clip(lat, TileSytem.LATITUDE_RANGE)
-		return cos(lat * pi / 180) * 2 * pi * EARTH_RADIUS / TileSystem.map_size(level)
+		lat = TileSystem.clip(lat, TileSystem.LATITUDE_RANGE)
+		return cos(lat * pi / 180) * 2 * pi * TileSystem.EARTH_RADIUS / TileSystem.map_size(level)
 
 	@staticmethod
-	@precondition(valid_level(*args[1]))
+	@precondition(lambda lat, lvl, dpi: valid_level(lvl))
 	def map_scale(lat, level, dpi):
 		"""Gets the scale of the map expressed as ratio 1	: N. Returns N"""
 		return TileSystem.ground_resolution(lat, level) * dpi / 0.0254

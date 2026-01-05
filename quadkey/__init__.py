@@ -17,7 +17,6 @@ class QuadKey:
 		return self.key
 
 	@classmethod
-	@precondition(TileSystem.valid_level)
 	def from_str(cls, key):
 		level = len(key)
 		lat, lon = QuadKey.get_coordinates(key)

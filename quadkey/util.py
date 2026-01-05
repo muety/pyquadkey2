@@ -2,7 +2,7 @@ import functools
 
 def condition(precondition=None, postcondition=None):
     def decorator(func):
-        @functools.wraps(func) # presever name, docstring, etc
+        @functools.wraps(func) # preserve name, docstring, etc
         def wrapper(*args, **kwargs): #NOTE: no self
             if precondition is not None:
                assert precondition(*args, **kwargs)

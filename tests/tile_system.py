@@ -17,14 +17,26 @@ class TileSystemTest(TestCase):
 		with self.assertRaises(AssertionError):
 			TileSystem.map_size(0)
 
-	def testFromString(self):
-		pass
+	def testGroundResolution(self):
+		TileSystem.ground_resolution(45, 7)
 
-	def testToString(self):
-		pass
+	def testMapScale(self):
+		TileSystem.map_scale(45, 7, 45)
 
-	def testGetQuadKey(self):
-		pass
+	def testGeoToPixel(self):
+		TileSystem.geo_to_pixel(geo, level)
 
-	def testGetCoordinates(self):
-		pass
+	def testPixelToGeo(self):
+		TileSystem.pixel_to_geo(pixel, level)
+
+	def testPixelToTile(self):
+		TileSystem.pixel_to_tile(pixel)
+
+	def testTileToPixel(self):
+		TileSystem.tile_to_pixel(tile)
+
+	def testTileToQuadkey(self):
+		TileSystem.tile_to_quadkey(tile, level)
+
+	def testQuadkeyToTile(self):
+		TileSystem.quadkey_to_tile(quadkey)
