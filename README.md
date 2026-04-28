@@ -27,11 +27,11 @@ project and adds:
 ## Installation
 ### Requirements
 
-This library requires **Python 3.10** or higher. To compile it from source, Cython is required in addition.
+This library requires **Python 3.13** or higher. To compile it from source, Cython is required in addition.
 
-### Using Pip / uv
+### Using pip / uv
 ```bash
-$ pip install pyquadkey2  # or uv add pyquadkey2
+$ uv add pyquadkey2  # pip install pyquadkey2
 ```
 
 Pip / uv installation is only tested for Linux and Mac, yet. If you encounter problems with the installation on Windows, please report them as a new issue.
@@ -74,9 +74,6 @@ $ uv build
 ```bash
 # Use env PYTHONPATH=./src as a option to choose test on src or test on installed package
 PYTHONPATH=./src python3 -m unittest -v tests/test_*.py tests/*/test_*.py
-
-# Or use pytest to make your life easier
-pytest
 ```
 
 ### Release
@@ -85,7 +82,7 @@ See [here](https://packaging.python.org/en/latest/tutorials/packaging-projects/)
 
 ```bash
 cd dist
-twine upload --repository testpypi *
+uv tool twine upload --repository testpypi *
 ```
 
 ## License
